@@ -1,0 +1,10 @@
+{
+  "description": "Creates a personalized online portfolio from a CV to showcase skills and experience, helping professionals present themselves effectively.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
