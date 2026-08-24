@@ -4,45 +4,47 @@ const NAV = ['About', 'Experience', 'Skills', 'Projects', 'Contact']
 
 const SKILLS = {
   'Programming': ['Kotlin', 'Java', 'Python'],
-  'Android': ['Android Studio', 'Jetpack Compose', 'MVVM'],
-  'Database': ['SQLite', 'Firebase Auth', 'Cloud Firestore'],
-  'Tools': ['Git', 'Agile', 'Teamwork.com'],
+  'Android': ['Android Studio', 'Jetpack Compose', 'MVVM', 'Coroutines', 'CameraX', 'ML Kit'],
+  'Database': ['SQLite', 'Firebase Auth', 'Cloud Firestore', 'Firebase Realtime DB', 'TiDB', 'MySQL'],
+  'Tools': ['Git', 'Agile', 'Teamwork.com', 'Vite', 'Node.js', 'Express', 'Cloudflare Workers'],
+  'Web': ['React', 'TypeScript', 'HTML/CSS', 'JavaScript', 'REST API', 'JWT'],
 }
 
 const SOFT_SKILLS = [
-  'Effective Communication',
-  'Strong Teamwork',
-  'Time Management',
-  'Creative Problem Solving',
+  'Effective communication and presentation skills',
+  'Strong teamwork skills',
+  'Good time management',
+  'Creative thinking and problem-solving abilities',
 ]
 
 const PROJECTS = [
   {
     year: '2026',
-    name: 'PiggyBite',
-    subtitle: 'Smart Personal Finance Manager — Android',
-    github: 'https://github.com/vinh0407/PiggyBite',
-    tech: ['Kotlin', 'Firebase', 'MVVM', 'ML Kit', 'Room DB', 'CameraX'],
+    name: 'Smart Room Search (Trọ Xịn)',
+    subtitle: 'Full-Stack Web & Android Application',
+    github: 'https://github.com/vinh0407/smart-room-search',
+    tech: ['React', 'TypeScript', 'Kotlin', 'Jetpack Compose', 'Node.js', 'Express.js', 'Cloudflare Workers', 'TiDB/MySQL', 'JWT', 'REST API', 'Vercel'],
     points: [
-      'Personal finance management app with real-time Firebase cloud sync.',
-      'Firebase Authentication (Email/Password & Phone) for secure login.',
-      'Expense, income, wallet, and shared saving fund management.',
-      'Google ML Kit OCR and Vietnamese voice recognition for transaction input.',
-      'Analytics dashboards with charts, transaction history, and CSV import/export.',
+      'Multi-platform room rental search system with tenant website, admin dashboard, and native Android app sharing a backend API.',
+      'Responsive web apps with React, Vite, TypeScript for room search, filtering, maps, favorites, and rental management.',
+      'Native Android app with Kotlin and Jetpack Compose featuring room browsing, offline favorites, and admin features.',
+      'REST API built with Node.js, Express, and Cloudflare Workers with JWT authentication and role-based admin management.',
+      'Designed TiDB Cloud/MySQL database with AI-assisted room data entry, geocoding, image upload, and analytics.',
     ],
   },
   {
     year: '2026',
-    name: 'Product Review System',
-    subtitle: 'Full-Stack Web Application — PHP',
-    github: 'https://github.com/vinh0407/product_review_system',
-    tech: ['PHP', 'MySQL', 'HTML/CSS', 'JavaScript'],
+    name: 'PiggyBite',
+    subtitle: 'Smart Personal Finance Manager — Android',
+    github: 'https://github.com/vinh0407/PiggyBite',
+    tech: ['Kotlin', 'Firebase', 'MVVM', 'ML Kit', 'Room DB', 'CameraX', 'Coroutines', 'Material Design 3'],
     points: [
-      'Full-stack web app for product browsing, reviewing, and ordering.',
-      'Authentication with session management (Login/Register).',
-      'Product catalog with search, rating, and review features.',
-      'Order management and order history functionality.',
-      'Admin dashboard with product, order, and user management (CRUD).',
+      'Personal finance management app with real-time Firebase cloud synchronization.',
+      'Firebase Authentication (Email/Password & Phone) for secure login.',
+      'Expense, income, wallet, and shared saving fund management with Firebase Realtime Database.',
+      'Google ML Kit OCR, CameraX, and Vietnamese voice recognition for smart transaction input.',
+      'Analytics dashboards with charts, transaction history, and CSV import/export features.',
+      'Applied MVVM architecture, Room Database, Coroutines, Material Design 3 for clean maintainable code.',
     ],
   },
   {
@@ -50,12 +52,14 @@ const PROJECTS = [
     name: 'IriShield Biometric SDK',
     subtitle: 'Android Frontend — IriTech',
     github: null,
-    tech: ['Kotlin', 'Android SDK', 'Jetpack Compose', 'Coroutines'],
+    tech: ['Kotlin', 'Android SDK', 'Jetpack Compose', 'Coroutines', 'MVVM'],
     points: [
-      'Integrated IriShield biometric SDK into Android applications.',
-      'Built and maintained UI with Jetpack Compose following MVVM architecture.',
-      'Async biometric processing via Coroutines for optimized UX.',
-      'Tested on 10+ Android devices and resolved compatibility issues.',
+      'Developed Android frontend components using Kotlin and Android SDK for biometric SDK integration.',
+      'Integrated and tested IriShield biometric SDK for mobile applications.',
+      'Built and maintained UI screens with Jetpack Compose following MVVM architecture.',
+      'Used Coroutines for asynchronous biometric processing and optimized user interactions.',
+      'Collaborated with backend and SDK teams to ensure smooth integration and performance.',
+      'Tested biometric authentication on 10+ Android devices and resolved compatibility issues.',
     ],
   },
 ]
@@ -391,8 +395,8 @@ export default function App() {
                   </GlitchText>
                 </h1>
 
-                <p className="mt-8 max-w-xl text-base leading-relaxed" style={{ color: '#5a8fa0' }}>
-                  Hi, I'm Vinh, a Mobile &amp; Frontend Developer passionate about building intuitive, high-performance applications. I specialize in Flutter, Android (Kotlin), and modern web technologies, creating responsive websites and cross-platform mobile apps with clean architecture and great user experiences. I'm always eager to learn new technologies and turn ideas into real-world products.
+<p className="mt-8 max-w-xl text-base leading-relaxed" style={{ color: '#5a8fa0' }}>
+                  Final-year IT student specializing in Android development. Skilled in Kotlin and modern Android frameworks, with practical experience in biometric SDK integration at IriTech. Quick learner, adaptable, and driven to create meaningful mobile applications.
                 </p>
 
                 <div className="flex flex-wrap gap-4 mt-10">
@@ -412,6 +416,7 @@ export default function App() {
                     { label: 'Projects Built', val: 3, suffix: '+' },
                     { label: 'Devices Tested', val: 10, suffix: '+' },
                     { label: 'Months Intern', val: 4, suffix: '' },
+                    { label: 'Years Coding', val: 2, suffix: '+' },
                   ].map(({ label, val, suffix }) => (
                     <div key={label}>
                       <p className="mono text-3xl font-black" style={{ color: '#00d4ff', textShadow: '0 0 16px rgba(0,212,255,0.5)' }}>
