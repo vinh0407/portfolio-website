@@ -23,6 +23,7 @@ const PROJECTS = [
     name: 'Smart Room Search (Trọ Xịn)',
     subtitle: 'Full-Stack Web & Android Application',
     github: 'https://github.com/vinh0407/smart-room-search',
+    website: 'https://smart-room-search.vercel.app',
     tech: ['React', 'TypeScript', 'Kotlin', 'Jetpack Compose', 'Node.js', 'Express.js', 'Cloudflare Workers', 'TiDB/MySQL', 'JWT', 'REST API', 'Vercel'],
     points: [
       'Multi-platform room rental search system with tenant website, admin dashboard, and native Android app sharing a backend API.',
@@ -663,14 +664,22 @@ export default function App() {
                             </h3>
                             <p className="mono text-xs mt-1" style={{ color: '#2d5a6a' }}>{p.subtitle}</p>
                           </div>
-                          {p.github ? (
-                            <a href={p.github} target="_blank" rel="noreferrer" className="mono text-xs px-4 py-2 shrink-0 transition-all hover:border-[#00d4ff] hover:text-[#00d4ff] hover:shadow-[0_0_16px_rgba(0,212,255,0.3)]"
-                              style={{ border: '1px solid #091e2d', color: '#2d5a6a', textDecoration: 'none' }}>
-                              GitHub ↗
-                            </a>
-                          ) : (
-                            <span className="mono text-xs px-4 py-2" style={{ border: '1px solid #091e2d', color: '#0d2a3a' }}>Private / NDA</span>
-                          )}
+                          <div className="flex gap-2">
+                            {p.github ? (
+                              <a href={p.github} target="_blank" rel="noreferrer" className="mono text-xs px-4 py-2 shrink-0 transition-all hover:border-[#00d4ff] hover:text-[#00d4ff] hover:shadow-[0_0_16px_rgba(0,212,255,0.3)]"
+                                style={{ border: '1px solid #091e2d', color: '#2d5a6a', textDecoration: 'none' }}>
+                                GitHub ↗
+                              </a>
+                            ) : (
+                              <span className="mono text-xs px-4 py-2" style={{ border: '1px solid #091e2d', color: '#0d2a3a' }}>Private / NDA</span>
+                            )}
+                            {p.website && (
+                              <a href={p.website} target="_blank" rel="noreferrer" className="mono text-xs px-4 py-2 shrink-0 transition-all hover:border-[#00d4ff] hover:text-[#00d4ff] hover:shadow-[0_0_16px_rgba(0,212,255,0.3)]"
+                                style={{ border: '1px solid #091e2d', color: '#2d5a6a', textDecoration: 'none' }}>
+                                Live Demo ↗
+                              </a>
+                            )}
+                          </div>
                         </div>
                         <div className="flex flex-wrap gap-2 mt-4">
                           {p.tech.map(t => (
