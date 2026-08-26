@@ -101,7 +101,7 @@ const PROJECTS = [
     github: "https://github.com/vinh0407/PiggyBite",
     live: null,
   },
-]
+].sort((a, b) => Number(b.year) - Number(a.year))
 
 const SKILL_GROUPS = [
   {
