@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-26T09:28:21.6116178Z",
+  "title": "Design System: Android Device Lab Dossier",
+  "extensions": {
+    "colorMeta": {
+      "canvas": { "role": "neutral", "displayName": "Cold Canvas", "canonical": "#f2f3ef", "tonalRamp": ["oklch(15% 0.006 145)", "oklch(27% 0.006 145)", "oklch(39% 0.006 145)", "oklch(51% 0.006 145)", "oklch(63% 0.006 145)", "oklch(75% 0.006 145)", "oklch(87% 0.006 145)", "oklch(95% 0.006 145)"] },
+      "surface": { "role": "neutral", "displayName": "Inspection Surface", "canonical": "#e8eae5", "tonalRamp": ["oklch(15% 0.009 145)", "oklch(27% 0.009 145)", "oklch(39% 0.009 145)", "oklch(51% 0.009 145)", "oklch(63% 0.009 145)", "oklch(75% 0.009 145)", "oklch(87% 0.009 145)", "oklch(95% 0.009 145)"] },
+      "ink": { "role": "neutral", "displayName": "Lab Ink", "canonical": "#141815", "tonalRamp": ["oklch(15% 0.012 145)", "oklch(27% 0.012 145)", "oklch(39% 0.012 145)", "oklch(51% 0.012 145)", "oklch(63% 0.012 145)", "oklch(75% 0.012 145)", "oklch(87% 0.012 145)", "oklch(95% 0.012 145)"] },
+      "muted": { "role": "neutral", "displayName": "Instrument Gray", "canonical": "#56605a", "tonalRamp": ["oklch(15% 0.018 150)", "oklch(27% 0.018 150)", "oklch(39% 0.018 150)", "oklch(51% 0.018 150)", "oklch(63% 0.018 150)", "oklch(75% 0.018 150)", "oklch(87% 0.018 150)", "oklch(95% 0.018 150)"] },
+      "line": { "role": "neutral", "displayName": "Rule Line", "canonical": "#bfc5bf", "tonalRamp": ["oklch(15% 0.01 145)", "oklch(27% 0.01 145)", "oklch(39% 0.01 145)", "oklch(51% 0.01 145)", "oklch(63% 0.01 145)", "oklch(75% 0.01 145)", "oklch(87% 0.01 145)", "oklch(95% 0.01 145)"] },
+      "line-strong": { "role": "neutral", "displayName": "Strong Rule", "canonical": "#747d76", "tonalRamp": ["oklch(15% 0.014 145)", "oklch(27% 0.014 145)", "oklch(39% 0.014 145)", "oklch(51% 0.014 145)", "oklch(63% 0.014 145)", "oklch(75% 0.014 145)", "oklch(87% 0.014 145)", "oklch(95% 0.014 145)"] },
+      "signal-orange": { "role": "primary", "displayName": "Signal Orange", "canonical": "#c83f28", "tonalRamp": ["oklch(15% 0.15 33)", "oklch(27% 0.15 33)", "oklch(39% 0.15 33)", "oklch(51% 0.15 33)", "oklch(63% 0.15 33)", "oklch(75% 0.15 33)", "oklch(87% 0.15 33)", "oklch(95% 0.15 33)"] },
+      "signal-on-orange": { "role": "neutral", "displayName": "Signal on Orange", "canonical": "#ffffff", "tonalRamp": ["oklch(15% 0 0)", "oklch(27% 0 0)", "oklch(39% 0 0)", "oklch(51% 0 0)", "oklch(63% 0 0)", "oklch(75% 0 0)", "oklch(87% 0 0)", "oklch(95% 0 0)"] },
+      "inverse": { "role": "neutral", "displayName": "Inverse Bench", "canonical": "#171b18", "tonalRamp": ["oklch(15% 0.012 145)", "oklch(27% 0.012 145)", "oklch(39% 0.012 145)", "oklch(51% 0.012 145)", "oklch(63% 0.012 145)", "oklch(75% 0.012 145)", "oklch(87% 0.012 145)", "oklch(95% 0.012 145)"] },
+      "inverse-ink": { "role": "neutral", "displayName": "Inverse Ink", "canonical": "#f4f5f1", "tonalRamp": ["oklch(15% 0.006 145)", "oklch(27% 0.006 145)", "oklch(39% 0.006 145)", "oklch(51% 0.006 145)", "oklch(63% 0.006 145)", "oklch(75% 0.006 145)", "oklch(87% 0.006 145)", "oklch(95% 0.006 145)"] },
+      "focus": { "role": "primary", "displayName": "Signal Focus", "canonical": "#c83f28", "tonalRamp": ["oklch(15% 0.15 33)", "oklch(27% 0.15 33)", "oklch(39% 0.15 33)", "oklch(51% 0.15 33)", "oklch(63% 0.15 33)", "oklch(75% 0.15 33)", "oklch(87% 0.15 33)", "oklch(95% 0.15 33)"] },
+      "selection": { "role": "primary", "displayName": "Warm Selection", "canonical": "#ffc6b8", "tonalRamp": ["oklch(15% 0.07 33)", "oklch(27% 0.07 33)", "oklch(39% 0.07 33)", "oklch(51% 0.07 33)", "oklch(63% 0.07 33)", "oklch(75% 0.07 33)", "oklch(87% 0.07 33)", "oklch(95% 0.07 33)"] },
+      "dark-canvas": { "role": "neutral", "displayName": "Dark Canvas", "canonical": "#121513", "tonalRamp": ["oklch(15% 0.008 145)", "oklch(27% 0.008 145)", "oklch(39% 0.008 145)", "oklch(51% 0.008 145)", "oklch(63% 0.008 145)", "oklch(75% 0.008 145)", "oklch(87% 0.008 145)", "oklch(95% 0.008 145)"] },
+      "dark-surface": { "role": "neutral", "displayName": "Dark Inspection Surface", "canonical": "#1b201c", "tonalRamp": ["oklch(15% 0.014 145)", "oklch(27% 0.014 145)", "oklch(39% 0.014 145)", "oklch(51% 0.014 145)", "oklch(63% 0.014 145)", "oklch(75% 0.014 145)", "oklch(87% 0.014 145)", "oklch(95% 0.014 145)"] },
+      "dark-ink": { "role": "neutral", "displayName": "Dark Ink", "canonical": "#eef1ec", "tonalRamp": ["oklch(15% 0.008 145)", "oklch(27% 0.008 145)", "oklch(39% 0.008 145)", "oklch(51% 0.008 145)", "oklch(63% 0.008 145)", "oklch(75% 0.008 145)", "oklch(87% 0.008 145)", "oklch(95% 0.008 145)"] },
+      "dark-muted": { "role": "neutral", "displayName": "Dark Instrument Gray", "canonical": "#aab2ac", "tonalRamp": ["oklch(15% 0.014 145)", "oklch(27% 0.014 145)", "oklch(39% 0.014 145)", "oklch(51% 0.014 145)", "oklch(63% 0.014 145)", "oklch(75% 0.014 145)", "oklch(87% 0.014 145)", "oklch(95% 0.014 145)"] },
+      "dark-line": { "role": "neutral", "displayName": "Dark Rule", "canonical": "#39423b", "tonalRamp": ["oklch(15% 0.018 145)", "oklch(27% 0.018 145)", "oklch(39% 0.018 145)", "oklch(51% 0.018 145)", "oklch(63% 0.018 145)", "oklch(75% 0.018 145)", "oklch(87% 0.018 145)", "oklch(95% 0.018 145)"] },
+      "dark-line-strong": { "role": "neutral", "displayName": "Dark Strong Rule", "canonical": "#78827a", "tonalRamp": ["oklch(15% 0.018 145)", "oklch(27% 0.018 145)", "oklch(39% 0.018 145)", "oklch(51% 0.018 145)", "oklch(63% 0.018 145)", "oklch(75% 0.018 145)", "oklch(87% 0.018 145)", "oklch(95% 0.018 145)"] },
+      "dark-signal-orange": { "role": "primary", "displayName": "Dark Signal Orange", "canonical": "#f06a4d", "tonalRamp": ["oklch(15% 0.14 33)", "oklch(27% 0.14 33)", "oklch(39% 0.14 33)", "oklch(51% 0.14 33)", "oklch(63% 0.14 33)", "oklch(75% 0.14 33)", "oklch(87% 0.14 33)", "oklch(95% 0.14 33)"] },
+      "dark-signal-on-orange": { "role": "neutral", "displayName": "Dark Signal on Orange", "canonical": "#17120f", "tonalRamp": ["oklch(15% 0.018 40)", "oklch(27% 0.018 40)", "oklch(39% 0.018 40)", "oklch(51% 0.018 40)", "oklch(63% 0.018 40)", "oklch(75% 0.018 40)", "oklch(87% 0.018 40)", "oklch(95% 0.018 40)"] },
+      "dark-inverse": { "role": "neutral", "displayName": "Dark Inverse Bench", "canonical": "#e9ede8", "tonalRamp": ["oklch(15% 0.008 145)", "oklch(27% 0.008 145)", "oklch(39% 0.008 145)", "oklch(51% 0.008 145)", "oklch(63% 0.008 145)", "oklch(75% 0.008 145)", "oklch(87% 0.008 145)", "oklch(95% 0.008 145)"] },
+      "dark-inverse-ink": { "role": "neutral", "displayName": "Dark Inverse Ink", "canonical": "#171a18", "tonalRamp": ["oklch(15% 0.012 145)", "oklch(27% 0.012 145)", "oklch(39% 0.012 145)", "oklch(51% 0.012 145)", "oklch(63% 0.012 145)", "oklch(75% 0.012 145)", "oklch(87% 0.012 145)", "oklch(95% 0.012 145)"] },
+      "dark-focus": { "role": "primary", "displayName": "Dark Signal Focus", "canonical": "#ff8b70", "tonalRamp": ["oklch(15% 0.11 33)", "oklch(27% 0.11 33)", "oklch(39% 0.11 33)", "oklch(51% 0.11 33)", "oklch(63% 0.11 33)", "oklch(75% 0.11 33)", "oklch(87% 0.11 33)", "oklch(95% 0.11 33)"] },
+      "dark-selection": { "role": "primary", "displayName": "Dark Warm Selection", "canonical": "#733322", "tonalRamp": ["oklch(15% 0.09 33)", "oklch(27% 0.09 33)", "oklch(39% 0.09 33)", "oklch(51% 0.09 33)", "oklch(63% 0.09 33)", "oklch(75% 0.09 33)", "oklch(87% 0.09 33)", "oklch(95% 0.09 33)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero value statement only." },
+      "headline": { "displayName": "Headline", "purpose": "Major section openings." },
+      "title": { "displayName": "Title", "purpose": "Evidence headings and compact component titles." },
+      "body": { "displayName": "Body", "purpose": "Human-readable explanation and supporting copy." },
+      "label": { "displayName": "Evidence Label", "purpose": "Dates, statuses, field labels, and provenance." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Physical-feeling entrances and control movement." },
+      { "name": "state-fast", "value": "200ms ease", "purpose": "Navigation and evidence-link color changes." },
+      { "name": "state-standard", "value": "220ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Button transforms and skip-link movement." },
+      { "name": "hero-reveal", "value": "850ms power3.out, 90ms stagger", "purpose": "Sequential hero-copy entrance when motion is permitted." },
+      { "name": "sheet-reveal", "value": "1050ms power4.out, 180ms delay", "purpose": "Top-to-bottom profile-sheet reveal when motion is permitted." }
+    ],
+    "breakpoints": [
+      { "name": "stack", "value": "1080px" },
+      { "name": "mobile", "value": "767px" },
+      { "name": "narrow", "value": "390px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The main recruiter action on a light surface.",
+      "html": "<a class=\"ds-button ds-button-primary\" href=\"#work\">View selected work →</a>",
+      "css": ".ds-button{min-height:50px;display:inline-flex;align-items:center;justify-content:center;gap:11px;padding:12px 18px;border:1px solid transparent;border-radius:var(--radius);font-family:var(--font-sans);font-size:14px;font-weight:600;text-decoration:none;cursor:pointer;transition:background 220ms ease,color 220ms ease,transform 220ms var(--ease-out)}.ds-button-primary{background:var(--accent);color:var(--accent-ink)}.ds-button-primary:hover{background:var(--ink);color:var(--canvas);transform:translateY(-2px)}.ds-button-primary:focus-visible{outline:3px solid color-mix(in srgb,var(--focus) 55%,transparent);outline-offset:4px}.ds-button-primary:active{transform:scale(.98)}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A bordered supporting action that preserves the quiet field.",
+      "html": "<a class=\"ds-button ds-button-secondary\" href=\"#\">Download CV ↓</a>",
+      "css": ".ds-button{min-height:50px;display:inline-flex;align-items:center;justify-content:center;gap:11px;padding:12px 18px;border:1px solid transparent;border-radius:var(--radius);font-family:var(--font-sans);font-size:14px;font-weight:600;text-decoration:none;cursor:pointer;transition:background 220ms ease,color 220ms ease,border-color 220ms ease,transform 220ms var(--ease-out)}.ds-button-secondary{border-color:var(--line-strong);background:transparent;color:var(--ink)}.ds-button-secondary:hover{background:var(--surface);transform:translateY(-2px)}.ds-button-secondary:focus-visible{outline:3px solid color-mix(in srgb,var(--focus) 55%,transparent);outline-offset:4px}.ds-button-secondary:active{transform:scale(.98)}"
+    },
+    {
+      "name": "Icon Button",
+      "kind": "button",
+      "refersTo": "icon-button",
+      "description": "A compact theme or menu control with restrained dossier geometry.",
+      "html": "<button class=\"ds-icon-button\" type=\"button\" aria-label=\"Toggle theme\"><svg aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41\"/></svg></button>",
+      "css": ".ds-icon-button{width:44px;height:44px;display:grid;place-items:center;padding:0;border:1px solid var(--line);border-radius:var(--radius);background:transparent;color:var(--ink);cursor:pointer;transition:border-color 200ms ease,background 200ms ease,transform 200ms var(--ease-out)}.ds-icon-button:hover{border-color:var(--line-strong);background:var(--surface)}.ds-icon-button:focus-visible{outline:3px solid color-mix(in srgb,var(--focus) 55%,transparent);outline-offset:4px}.ds-icon-button:active{transform:scale(.97)}"
+    },
+    {
+      "name": "Evidence Action Link",
+      "kind": "custom",
+      "description": "An explicit source or live-product link used inside evidence records.",
+      "html": "<a class=\"ds-action-link\" href=\"#\">View source <svg aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"17\" height=\"17\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></a>",
+      "css": ".ds-action-link{min-height:44px;display:inline-flex;align-items:center;gap:8px;color:var(--ink);font-family:var(--font-sans);font-weight:600;text-decoration:underline;text-decoration-color:var(--line-strong);text-underline-offset:6px;transition:color 200ms ease,text-decoration-color 200ms ease}.ds-action-link:hover{color:var(--accent);text-decoration-color:var(--accent)}.ds-action-link:focus-visible{outline:3px solid color-mix(in srgb,var(--focus) 55%,transparent);outline-offset:4px}"
+    },
+    {
+      "name": "Desktop Navigation",
+      "kind": "nav",
+      "description": "Quiet centered navigation that yields visual priority to the dossier content.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Primary navigation\"><a href=\"#work\">Work</a><a href=\"#experience\">Experience</a><a href=\"#about\">About</a></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:clamp(16px,2vw,30px);font-family:var(--font-sans)}.ds-nav a{color:var(--muted);font-size:14px;font-weight:500;text-decoration:none;text-underline-offset:5px;transition:color 200ms ease}.ds-nav a:hover{color:var(--accent)}.ds-nav a:focus-visible{outline:3px solid color-mix(in srgb,var(--focus) 55%,transparent);outline-offset:4px}"
+    },
+    {
+      "name": "Profile Sheet",
+      "kind": "card",
+      "refersTo": "profile-sheet",
+      "description": "The signature candidate dossier summarizing role and verified focus.",
+      "html": "<article class=\"ds-profile-sheet\"><header><span>Candidate profile</span><span>HCMC, Vietnam</span></header><dl><div><dt>Primary focus</dt><dd>Android development</dd></div><div><dt>Core stack</dt><dd>Kotlin, Compose, MVVM</dd></div><div><dt>Practical work</dt><dd>IriTech biometric SDK</dd></div></dl><a href=\"#\">GitHub profile <span>→</span></a></article>",
+      "css": ".ds-profile-sheet{display:flex;flex-direction:column;justify-content:space-between;padding:22px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);font-family:var(--font-sans)}.ds-profile-sheet header{display:flex;justify-content:space-between;gap:12px;padding-bottom:15px;border-bottom:1px solid var(--line);color:var(--muted);font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.04em}.ds-profile-sheet dl{margin:26px 0}.ds-profile-sheet dl div{padding:15px 0;display:grid;grid-template-columns:.8fr 1.2fr;gap:16px;border-bottom:1px solid var(--line)}.ds-profile-sheet dt{color:var(--muted);font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.04em}.ds-profile-sheet dd{margin:0;font-size:15px;font-weight:500}.ds-profile-sheet>a{min-height:48px;display:flex;align-items:center;justify-content:space-between;padding-top:15px;border-top:1px solid var(--line-strong);color:var(--ink);font-weight:600;text-decoration:none}.ds-profile-sheet>a:hover{color:var(--accent)}.ds-profile-sheet>a:focus-visible{outline:3px solid color-mix(in srgb,var(--focus) 55%,transparent);outline-offset:4px}"
+    },
+    {
+      "name": "Evidence Label",
+      "kind": "custom",
+      "refersTo": "metadata-label",
+      "description": "A mono metadata marker used for status, technology, verification, and dates.",
+      "html": "<span class=\"ds-evidence-label\">Source available</span>",
+      "css": ".ds-evidence-label{display:inline-flex;align-items:center;color:var(--accent);font-family:var(--font-mono);font-size:10px;font-weight:400;line-height:1.55;text-transform:uppercase;letter-spacing:.04em}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Android Device Lab Dossier",
+    "overview": "The portfolio behaves like a device-compatibility dossier: calm at a distance, exact on inspection, and organized around verifiable engineering evidence. Cold neutral surfaces create the feeling of a lab bench or inspection sheet, while signal orange marks the few facts and actions that need immediate attention.\n\nThe system is editorial rather than dashboard-like. Large, tightly set sans-serif headlines establish confidence; ruled records, square sheets, numbered evidence, and compact mono metadata make the content feel tested and attributable. Motion is a restrained reveal mechanism, never decoration, and disappears under reduced-motion preferences.",
+    "keyCharacteristics": [
+      "Cold neutral light and dark themes with one signal-orange accent.",
+      "Oversized editorial headlines paired with compact mono evidence labels.",
+      "Flat, ruled dossier surfaces with nearly square corners.",
+      "Wide desktop evidence grids that collapse cleanly into one-column mobile records.",
+      "Visible recruiter actions and accessible interaction states."
+    ],
+    "rules": [
+      { "name": "The One Signal Rule", "body": "Orange is the only expressive hue; use it for decisions and evidence, never as broad decoration.", "section": "colors" },
+      { "name": "The Theme-Pair Rule", "body": "Every semantic color role keeps the same job across light and dark themes even when its literal value changes.", "section": "colors" },
+      { "name": "The Mono Means Evidence Rule", "body": "Never use the mono face for general prose or display headlines; it signals data, status, time, or provenance.", "section": "typography" },
+      { "name": "The Tight Headline Rule", "body": "Large headings use compact line-height and negative tracking so they read as deliberate blocks, not airy marketing copy.", "section": "typography" },
+      { "name": "The Ruled Record Rule", "body": "Section and record boundaries are created by full-width hairlines and tonal bands, not floating containers.", "section": "layout" },
+      { "name": "The Flat Lab Bench Rule", "body": "Keep content surfaces physically flat; communicate hierarchy with field color, borders, and spacing.", "section": "elevation" },
+      { "name": "The Near-Square Rule", "body": "Do not soften the dossier into friendly rounded cards; the small control radius is the upper limit for branded UI.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do lead with evidence, readable hierarchy, and explicit verification states.",
+      "Do reserve signal orange for primary actions, status, time, metadata emphasis, and interaction response.",
+      "Do use Outfit for human-readable hierarchy and JetBrains Mono only for data-like annotations.",
+      "Do preserve the flat ruled-sheet construction in both light and dark themes.",
+      "Do keep focus states visible and honor reduced-motion preferences."
+    ],
+    "donts": [
+      "Don't introduce gradients, ornamental shadows, glass cards, or extra accent hues.",
+      "Don't round dossier records into soft card tiles or break evidence into a generic bento grid.",
+      "Don't use mono typography for paragraphs or oversized display copy.",
+      "Don't turn missing evidence into decorative placeholders or invented product claims.",
+      "Don't let animation obscure content order or become required for comprehension."
+    ]
+  }
+}

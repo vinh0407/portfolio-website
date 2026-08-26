@@ -4,12 +4,33 @@
     <!-- figma:head-start -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Portfolio of Ưng Đỗ Thế Vinh, an Android developer building thoughtful mobile and full-stack products in Ho Chi Minh City." />
-    <meta name="theme-color" content="#f7f8fb" />
-    <title>Ưng Đỗ Thế Vinh | Android Developer</title>
+    <meta name="description" content="Portfolio of Ưng Đỗ Thế Vinh, a final-year IT student seeking Frontend, Android, or Flutter internships with responsive web and native Android project experience." />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f2f3ef" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121513" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Ưng Đỗ Thế Vinh | Frontend &amp; Mobile Developer" />
+    <meta property="og:description" content="Frontend and mobile portfolio featuring React interfaces, Kotlin applications, biometric SDK experience, and full-stack project delivery." />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>Ưng Đỗ Thế Vinh | Frontend &amp; Mobile Developer</title>
+    <script>
+      try {
+        const savedTheme = localStorage.getItem("portfolio-theme");
+        document.documentElement.dataset.theme = savedTheme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      } catch {}
+    </script>
     <!-- figma:head-end -->
   </head>
   <body>
+    <!--
+      THESIS: A frontend and mobile engineering dossier that replaces generic portfolio cards with verified work evidence.
+      OWN-WORLD: Cold neutral surfaces, signal-orange accents, square inspection sheets, precise sans typography, and mono only for data.
+      STORY: Recruiters identify Vinh's frontend and mobile direction, inspect credible work, verify technical range, and make contact.
+      FIRST VIEWPORT: A left-led value statement and actions sit beside a structured candidate profile sheet with current role targets and evidence-backed skills.
+      FORM: Device compatibility dossier, seventh grounded direction, seed dfac3154.
+      FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+    -->
     <!-- figma:body-start -->
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
