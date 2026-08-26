@@ -1,766 +1,86 @@
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowDown, ArrowUpRight, Check, Code, Copy, GithubLogo, List, X } from "@phosphor-icons/react";
+import resumeUrl from "./imports/_ng____Th__Vinh.pdf";
 
-const NAV = ['About', 'Experience', 'Skills', 'Projects', 'Contact']
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const SKILLS = {
-  'Programming': ['Kotlin', 'Java', 'Python'],
-  'Android': ['Android Studio', 'Jetpack Compose', 'MVVM', 'Coroutines', 'CameraX', 'ML Kit'],
-  'Database': ['SQLite', 'Firebase Auth', 'Cloud Firestore', 'Firebase Realtime DB', 'TiDB', 'MySQL'],
-  'Tools': ['Git', 'Agile', 'Teamwork.com', 'Vite', 'Node.js', 'Express', 'Cloudflare Workers'],
-  'Web': ['React', 'TypeScript', 'HTML/CSS', 'JavaScript', 'REST API', 'JWT'],
-}
-
-const SOFT_SKILLS = [
-  'Effective communication and presentation skills',
-  'Strong teamwork skills',
-  'Good time management',
-  'Creative thinking and problem-solving abilities',
-]
-
+const NAV = ["About", "Experience", "Skills", "Projects", "Contact"];
+const SKILLS = [
+  { label: "Android", value: "Kotlin, Jetpack Compose, MVVM, Coroutines, CameraX, ML Kit" },
+  { label: "Web", value: "React, TypeScript, JavaScript, REST API, JWT" },
+  { label: "Data", value: "Firebase, SQLite, Room, TiDB, MySQL" },
+  { label: "Tools", value: "Git, Android Studio, Vite, Node.js, Express, Cloudflare Workers" },
+];
 const PROJECTS = [
-  {
-    year: '2026',
-    name: 'Smart Room Search (Trọ Xịn)',
-    subtitle: 'Full-Stack Web & Android Application',
-    github: 'https://github.com/vinh0407/smart-room-search',
-    website: 'https://smart-room-search.vercel.app',
-    tech: ['React', 'TypeScript', 'Kotlin', 'Jetpack Compose', 'Node.js', 'Express.js', 'Cloudflare Workers', 'TiDB/MySQL', 'JWT', 'REST API', 'Vercel'],
-    points: [
-      'Multi-platform room rental search system with tenant website, admin dashboard, and native Android app sharing a backend API.',
-      'Responsive web apps with React, Vite, TypeScript for room search, filtering, maps, favorites, and rental management.',
-      'Native Android app with Kotlin and Jetpack Compose featuring room browsing, offline favorites, and admin features.',
-      'REST API built with Node.js, Express, and Cloudflare Workers with JWT authentication and role-based admin management.',
-      'Designed TiDB Cloud/MySQL database with AI-assisted room data entry, geocoding, image upload, and analytics.',
-    ],
-  },
-  {
-    year: '2026',
-    name: 'PiggyBite',
-    subtitle: 'Smart Personal Finance Manager — Android',
-    github: 'https://github.com/vinh0407/PiggyBite',
-    tech: ['Kotlin', 'Firebase', 'MVVM', 'ML Kit', 'Room DB', 'CameraX', 'Coroutines', 'Material Design 3'],
-    points: [
-      'Personal finance management app with real-time Firebase cloud synchronization.',
-      'Firebase Authentication (Email/Password & Phone) for secure login.',
-      'Expense, income, wallet, and shared saving fund management with Firebase Realtime Database.',
-      'Google ML Kit OCR, CameraX, and Vietnamese voice recognition for smart transaction input.',
-      'Analytics dashboards with charts, transaction history, and CSV import/export features.',
-      'Applied MVVM architecture, Room Database, Coroutines, Material Design 3 for clean maintainable code.',
-    ],
-  },
-  {
-    year: '2025',
-    name: 'IriShield Biometric SDK',
-    subtitle: 'Android Frontend — IriTech',
-    github: null,
-    tech: ['Kotlin', 'Android SDK', 'Jetpack Compose', 'Coroutines', 'MVVM'],
-    points: [
-      'Developed Android frontend components using Kotlin and Android SDK for biometric SDK integration.',
-      'Integrated and tested IriShield biometric SDK for mobile applications.',
-      'Built and maintained UI screens with Jetpack Compose following MVVM architecture.',
-      'Used Coroutines for asynchronous biometric processing and optimized user interactions.',
-      'Collaborated with backend and SDK teams to ensure smooth integration and performance.',
-      'Tested biometric authentication on 10+ Android devices and resolved compatibility issues.',
-    ],
-  },
-]
+  { year: "2026", name: "Smart Room Search", alias: "Trọ Xịn", type: "Full-stack web and Android platform", github: "https://github.com/vinh0407/smart-room-search", website: "https://smart-room-search.vercel.app", color: "#ffd7c9", tech: ["React", "TypeScript", "Kotlin", "Compose", "Node.js", "TiDB"], description: "A shared rental ecosystem for tenants and property managers, spanning responsive web experiences, an admin dashboard, and a native Android app.", highlights: ["Search, maps, filtering, favorites and rental management", "JWT authentication with role-based admin access", "AI-assisted room entry, geocoding and analytics"] },
+  { year: "2026", name: "PiggyBite", alias: "Personal finance, made practical", type: "Native Android application", github: "https://github.com/vinh0407/PiggyBite", website: null, color: "#dce9ff", tech: ["Kotlin", "Firebase", "MVVM", "ML Kit", "Room", "CameraX"], description: "A personal finance companion that turns receipts and voice input into structured transactions, with real-time cloud sync and useful everyday analytics.", highlights: ["Receipt OCR and Vietnamese voice recognition", "Wallets, shared saving funds and transaction history", "Offline-first Room database with Firebase sync"] },
+  { year: "2025", name: "IriShield SDK", alias: "Biometric mobile integration", type: "Android frontend at IriTech", github: null, website: null, color: "#d9f2e6", tech: ["Kotlin", "Android SDK", "Compose", "Coroutines", "MVVM"], description: "Production Android interfaces for iris biometric workflows, built and tested across a broad device matrix in collaboration with SDK and backend engineers.", highlights: ["Biometric SDK integration and asynchronous processing", "Compatibility testing across more than 10 devices", "Compose UI following a maintainable MVVM architecture"] },
+];
 
-// ── Typing effect ──────────────────────────────────────────────
-function useTyping(text: string, speed = 55, startDelay = 400) {
-  const [displayed, setDisplayed] = useState('')
-  const [done, setDone] = useState(false)
-  useEffect(() => {
-    setDisplayed('')
-    setDone(false)
-    let i = 0
-    const t = setTimeout(() => {
-      const iv = setInterval(() => {
-        i++
-        setDisplayed(text.slice(0, i))
-        if (i >= text.length) { clearInterval(iv); setDone(true) }
-      }, speed)
-      return () => clearInterval(iv)
-    }, startDelay)
-    return () => clearTimeout(t)
-  }, [text, speed, startDelay])
-  return { displayed, done }
+function ArrowButton({ children, href }: { children: React.ReactNode; href: string }) {
+  return <a className="button button-primary group" href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noreferrer" : undefined}><span>{children}</span><span className="button-icon"><ArrowUpRight size={17} weight="bold" /></span></a>;
 }
 
-// ── Glitch text ────────────────────────────────────────────────
-function GlitchText({ children, className, style }: { children: string; className?: string; style?: React.CSSProperties }) {
-  const [glitching, setGlitching] = useState(false)
-  useEffect(() => {
-    const fire = () => {
-      setGlitching(true)
-      setTimeout(() => setGlitching(false), 180)
-    }
-    const base = 3000 + Math.random() * 4000
-    let timer: ReturnType<typeof setTimeout>
-    const schedule = () => { timer = setTimeout(() => { fire(); schedule() }, base) }
-    schedule()
-    return () => clearTimeout(timer)
-  }, [])
-  return (
-    <span
-      className={className}
-      style={{
-        ...style,
-        position: 'relative',
-        display: 'inline-block',
-        animation: glitching ? 'glitch 0.18s steps(2) forwards' : 'none',
-      }}
-      data-text={children}
-    >
-      {children}
-    </span>
-  )
+function SectionTitle({ kicker, title, copy }: { kicker: string; title: string; copy?: string }) {
+  return <div className="section-heading reveal"><p className="kicker">{kicker}</p><h2>{title}</h2>{copy && <p className="section-copy">{copy}</p>}</div>;
 }
 
-// ── InView fade ────────────────────────────────────────────────
-function useInView(threshold = 0.12) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
-  useEffect(() => {
-    const el = ref.current; if (!el) return
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true) }, { threshold })
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [])
-  return { ref, visible }
-}
-
-function FadeIn({ children, delay = 0, from = 'bottom' }: { children: React.ReactNode; delay?: number; from?: 'bottom' | 'left' | 'right' }) {
-  const { ref, visible } = useInView()
-  const translate = from === 'left' ? 'translateX(-32px)' : from === 'right' ? 'translateX(32px)' : 'translateY(28px)'
-  return (
-    <div ref={ref} style={{ opacity: visible ? 1 : 0, transform: visible ? 'none' : translate, transition: `opacity 0.7s ease ${delay}s, transform 0.7s ease ${delay}s` }}>
-      {children}
-    </div>
-  )
-}
-
-// ── Animated counter ───────────────────────────────────────────
-function Counter({ to, suffix = '' }: { to: number; suffix?: string }) {
-  const { ref, visible } = useInView()
-  const [val, setVal] = useState(0)
-  useEffect(() => {
-    if (!visible) return
-    let start = 0
-    const step = Math.ceil(to / 40)
-    const iv = setInterval(() => { start = Math.min(start + step, to); setVal(start); if (start >= to) clearInterval(iv) }, 30)
-    return () => clearInterval(iv)
-  }, [visible, to])
-  return <span ref={ref}>{val}{suffix}</span>
-}
-
-// ── Skill bar ──────────────────────────────────────────────────
-function SkillBar({ pct, delay = 0 }: { pct: number; delay?: number }) {
-  const { ref, visible } = useInView()
-  return (
-    <div ref={ref} className="h-px w-full" style={{ background: '#0a1f30' }}>
-      <div style={{ height: '100%', width: visible ? `${pct}%` : '0%', background: 'linear-gradient(90deg, #0066aa, #00d4ff)', transition: `width 1s ease ${delay}s`, boxShadow: visible ? '0 0 8px rgba(0,212,255,0.6)' : 'none' }} />
-    </div>
-  )
-}
-
-// ── Section label ──────────────────────────────────────────────
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  return <p className="mono text-xs tracking-[0.25em] uppercase mb-2" style={{ color: '#00d4ff' }}>{children}</p>
-}
-function Rule() {
-  return <div className="border-t mt-2 mb-10" style={{ borderColor: '#0a1f30' }} />
-}
-
-// ── Scanline overlay ───────────────────────────────────────────
-function Scanlines() {
-  return (
-    <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 999, opacity: 0.025, backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,212,255,0.5) 2px, rgba(0,212,255,0.5) 3px)', backgroundSize: '100% 3px' }} />
-  )
-}
-
-// ── Grid background ────────────────────────────────────────────
-function GridBg() {
-  return (
-    <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, opacity: 0.035 }}>
-      <div style={{ width: '100%', height: '100%', backgroundImage: 'linear-gradient(rgba(0,212,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.8) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
-    </div>
-  )
-}
-
-// ── Cursor tracker glow ────────────────────────────────────────
-function CursorGlow() {
-  const [pos, setPos] = useState({ x: -200, y: -200 })
-  useEffect(() => {
-    const h = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY })
-    window.addEventListener('mousemove', h)
-    return () => window.removeEventListener('mousemove', h)
-  }, [])
-  return (
-    <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 1 }}>
-      <div style={{ position: 'absolute', left: pos.x - 200, top: pos.y - 200, width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,212,255,0.07) 0%, transparent 70%)', transition: 'left 0.1s ease, top 0.1s ease' }} />
-    </div>
-  )
-}
-
-// ── Particle field ─────────────────────────────────────────────
-function Particles() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  useEffect(() => {
-    const canvas = canvasRef.current; if (!canvas) return
-    const ctx = canvas.getContext('2d')!
-    let animId: number
-    const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight }
-    resize()
-    window.addEventListener('resize', resize)
-    const count = 55
-    const pts = Array.from({ length: count }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      r: Math.random() * 1.2 + 0.3,
-      alpha: Math.random() * 0.5 + 0.1,
-    }))
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      for (const p of pts) {
-        p.x += p.vx; p.y += p.vy
-        if (p.x < 0) p.x = canvas.width
-        if (p.x > canvas.width) p.x = 0
-        if (p.y < 0) p.y = canvas.height
-        if (p.y > canvas.height) p.y = 0
-        ctx.beginPath()
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(0,212,255,${p.alpha})`
-        ctx.fill()
-      }
-      // draw connections
-      for (let i = 0; i < pts.length; i++) {
-        for (let j = i + 1; j < pts.length; j++) {
-          const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y
-          const d = Math.sqrt(dx * dx + dy * dy)
-          if (d < 120) {
-            ctx.beginPath()
-            ctx.moveTo(pts[i].x, pts[i].y)
-            ctx.lineTo(pts[j].x, pts[j].y)
-            ctx.strokeStyle = `rgba(0,180,255,${0.08 * (1 - d / 120)})`
-            ctx.lineWidth = 0.5
-            ctx.stroke()
-          }
-        }
-      }
-      animId = requestAnimationFrame(draw)
-    }
-    draw()
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize) }
-  }, [])
-  return <canvas ref={canvasRef} style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0 }} />
-}
-
-// ── Main ───────────────────────────────────────────────────────
 export default function App() {
-  const [activeNav, setActiveNav] = useState('')
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [copied, setCopied] = useState(false)
-  const { displayed: typedRole, done: roleDone } = useTyping('Android Developer · Intern', 60, 600)
-  const { displayed: typedLoc } = useTyping('Ho Chi Minh City, Vietnam', 45, roleDone ? 200 : 99999)
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText('ungdothevinh4704@gmail.com')
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+  const root = useRef<HTMLDivElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    const handler = () => {
-      const sections = NAV.map(n => document.getElementById(n.toLowerCase()))
-      const cur = sections.find(s => { if (!s) return false; const r = s.getBoundingClientRect(); return r.top <= 120 && r.bottom > 120 })
-      setActiveNav(cur?.id ?? '')
-    }
-    window.addEventListener('scroll', handler, { passive: true })
-    return () => window.removeEventListener('scroll', handler)
-  }, [])
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
 
-  return (
-    <>
-      <style>{`
-        @keyframes glitch {
-          0%   { clip-path: inset(20% 0 50% 0); transform: translate(-4px, 2px) skewX(-2deg); }
-          25%  { clip-path: inset(60% 0 10% 0); transform: translate(4px, -2px) skewX(2deg); }
-          50%  { clip-path: inset(5%  0 80% 0); transform: translate(-3px, 1px); }
-          75%  { clip-path: inset(40% 0 30% 0); transform: translate(3px, -1px) skewX(-1deg); }
-          100% { clip-path: inset(0); transform: none; }
-        }
-        @keyframes blink { 0%,100% { opacity:1 } 50% { opacity:0 } }
-        @keyframes pulse-border {
-          0%, 100% { box-shadow: 0 0 0 0 rgba(0,212,255,0); border-color: #0a1f30; }
-          50%       { box-shadow: 0 0 0 2px rgba(0,212,255,0.12); border-color: #00d4ff; }
-        }
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(-1deg); }
-          50%       { transform: translateY(-14px) rotate(1deg); }
-        }
-        @keyframes char-glow {
-          0%, 100% { filter: drop-shadow(0 0 12px rgba(0,212,255,0.25)) drop-shadow(0 20px 40px rgba(0,50,100,0.6)); }
-          50%       { filter: drop-shadow(0 0 28px rgba(0,212,255,0.55)) drop-shadow(0 20px 40px rgba(0,80,160,0.7)); }
-        }
-        @keyframes ring-spin {
-          to { transform: rotate(360deg); }
-        }
-        @keyframes ring-spin-rev {
-          to { transform: rotate(-360deg); }
-        }
-        @keyframes spin-slow { to { transform: rotate(360deg); } }
-        @keyframes scan {
-          0%   { top: -4px; }
-          100% { top: 100%; }
-        }
-        .tag-chip { animation: pulse-border 4s ease infinite; }
-        .tag-chip:nth-child(2n) { animation-delay: 1s; }
-        .tag-chip:nth-child(3n) { animation-delay: 2s; }
-        [data-text]::before {
-          content: attr(data-text);
-          position: absolute;
-          inset: 0;
-          color: #00d4ff;
-          clip-path: inset(0);
-        }
-      `}</style>
+  useGSAP(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    gsap.from(".hero-line > span", { yPercent: 105, duration: 1.05, stagger: 0.12, ease: "power4.out" });
+    gsap.from(".hero-support", { opacity: 0, y: 26, duration: 0.9, delay: 0.55, ease: "power3.out" });
+    gsap.utils.toArray<HTMLElement>(".reveal").forEach((element) => gsap.from(element, { opacity: 0, y: 52, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: element, start: "top 86%", once: true } }));
+    gsap.utils.toArray<HTMLElement>(".project-card").forEach((card, index) => {
+      gsap.from(card, { opacity: 0, scale: 0.94, y: 70, duration: 1, ease: "power3.out", scrollTrigger: { trigger: card, start: "top 88%", once: true } });
+      if (index < PROJECTS.length - 1) ScrollTrigger.create({ trigger: card, start: "top 112px", end: "+=48%", pin: true, pinSpacing: false });
+    });
+  }, { scope: root });
 
-      <Scanlines />
-      <GridBg />
-      <Particles />
-      <CursorGlow />
+  const copyEmail = async () => {
+    try { await navigator.clipboard.writeText("ungdothevinh4704@gmail.com"); setCopied(true); window.setTimeout(() => setCopied(false), 1800); }
+    catch { window.location.href = "mailto:ungdothevinh4704@gmail.com"; }
+  };
 
-      <div className="min-h-screen" style={{ background: '#020b14', color: '#ddeef5', position: 'relative', zIndex: 2 }}>
+  return <div ref={root} className="page-shell">
+    <a className="skip-link" href="#about">Skip to content</a>
+    <header className="nav-shell"><nav className="nav-island" aria-label="Primary navigation">
+      <a href="#about" className="brand" onClick={() => setMenuOpen(false)} aria-label="Ưng Đỗ Thế Vinh, home"><span>V.</span><span className="brand-name">Ưng Đỗ Thế Vinh</span></a>
+      <div className="desktop-nav">{NAV.map((item) => <a key={item} href={`#${item.toLowerCase()}`}>{item}</a>)}</div>
+      <a className="nav-contact" href="mailto:ungdothevinh4704@gmail.com">Let&apos;s talk</a>
+      <button className="menu-button" type="button" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="mobile-menu" onClick={() => setMenuOpen((value) => !value)}>{menuOpen ? <X size={22} /> : <List size={22} />}</button>
+    </nav></header>
+    <div id="mobile-menu" className={`mobile-menu ${menuOpen ? "is-open" : ""}`} aria-hidden={!menuOpen}>{NAV.map((item, index) => <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setMenuOpen(false)} style={{ transitionDelay: `${index * 55}ms` }}>{item}</a>)}</div>
 
-        {/* NAV */}
-        <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12"
-          style={{ height: 56, borderBottom: '1px solid #0a1f30', background: 'rgba(2,11,20,0.94)', backdropFilter: 'blur(12px)' }}>
-          <span className="mono text-sm font-bold tracking-tight" style={{ color: '#00d4ff', textShadow: '0 0 12px rgba(0,212,255,0.5)' }}>
-            UDV<span style={{ color: '#1e4a5a' }}>_portfolio</span>
-            <span className="mono" style={{ color: '#00d4ff', animation: 'blink 1s step-end infinite', marginLeft: 2 }}>█</span>
-          </span>
-          <ul className="hidden md:flex gap-8">
-            {NAV.map((n, i) => (
-              <li key={n} style={{ animationDelay: `${i * 0.1}s` }}>
-                <a href={`#${n.toLowerCase()}`} className="mono text-xs tracking-widest uppercase transition-all"
-                  style={{ color: activeNav === n.toLowerCase() ? '#00d4ff' : '#2d5a6a', textDecoration: 'none', textShadow: activeNav === n.toLowerCase() ? '0 0 10px rgba(0,212,255,0.6)' : 'none' }}>
-                  {activeNav === n.toLowerCase() && <span style={{ marginRight: 4 }}>›</span>}{n}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <button className="md:hidden flex flex-col gap-1.5 p-2" onClick={() => setMenuOpen(v => !v)} aria-label="Menu">
-            {[0, 1, 2].map(i => <span key={i} className="block w-5 h-px transition-all" style={{ background: '#00d4ff' }} />)}
-          </button>
-        </nav>
+    <main>
+      <section id="about" className="hero section-wrap">
+        <div className="hero-copy"><p className="kicker hero-support">Android developer based in Ho Chi Minh City</p><h1 aria-label="I build useful products for life on the move"><span className="hero-line"><span>I build useful products</span></span><span className="hero-line accent-line"><span>for life on the move.</span></span></h1>
+          <div className="hero-support hero-bottom"><p>I&apos;m Vinh, a mobile-first developer shaping dependable Android experiences and the web systems behind them.</p><div className="hero-actions"><ArrowButton href="mailto:ungdothevinh4704@gmail.com">Start a conversation</ArrowButton><a className="button button-secondary" href={resumeUrl} download>Download CV <ArrowDown size={17} weight="bold" /></a></div></div>
+        </div>
+        <div className="hero-art hero-support" aria-label="Developer profile illustration"><div className="art-window"><div className="art-toolbar"><span /><span /><span /></div><div className="code-panel"><Code size={42} weight="light" /><p>compose<br />ideas()</p></div><div className="phone-frame"><div className="phone-camera" /><div className="phone-screen"><span className="screen-label">CURRENTLY</span><strong>Building thoughtful mobile products.</strong><div className="screen-chip">Open to work</div></div></div></div><div className="art-caption"><span>Android</span><span>Full-stack</span><span>Product-minded</span></div></div>
+      </section>
 
-        {/* MOBILE MENU */}
-        {menuOpen && (
-          <div className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8" style={{ background: 'rgba(2,11,20,0.97)' }} onClick={() => setMenuOpen(false)}>
-            {NAV.map(n => (
-              <a key={n} href={`#${n.toLowerCase()}`} className="mono text-2xl tracking-widest uppercase" style={{ color: '#ddeef5', textDecoration: 'none' }}>{n}</a>
-            ))}
-          </div>
-        )}
+      <section id="experience" className="section-wrap section-block"><SectionTitle kicker="Experience" title="Learning fast. Shipping carefully." copy="Hands-on work with production biometric software and collaborative engineering teams." /><div className="experience-layout reveal"><div className="experience-meta"><span>Apr 2025 to Jul 2025</span><span>Ho Chi Minh City</span></div><article className="experience-body"><div><p className="role-company">IriTech Vietnam</p><h3>Android Intern</h3></div><p className="experience-lead">Integrated the IriShield biometric SDK into Android applications using Kotlin, Compose and Coroutines.</p><ul><li>Built maintainable Compose screens following MVVM architecture.</li><li>Optimized asynchronous biometric processing and user feedback.</li><li>Tested authentication on more than 10 Android devices.</li><li>Delivered production-ready features through Git and Agile workflows.</li></ul></article></div></section>
 
-        {/* HERO */}
-        <section id="about" style={{ paddingTop: 140, paddingBottom: 100, minHeight: '100vh', borderBottom: '1px solid #0a1f30', position: 'relative', overflow: 'hidden' }}
-          className="flex flex-col justify-end px-6 md:px-16 lg:px-24">
+      <section id="skills" className="section-wrap section-block"><SectionTitle kicker="Capabilities" title="A mobile core, with full-stack range." /><div className="skill-grid">{SKILLS.map((skill, index) => <article className={`skill-item reveal skill-${index + 1}`} key={skill.label}><span className="skill-index">0{index + 1}</span><div><h3>{skill.label}</h3><p>{skill.value}</p></div></article>)}</div><div className="principles reveal"><p>How I work</p><div className="principle-list"><span>Clear communication</span><span>Thoughtful problem solving</span><span>Reliable teamwork</span><span>Continuous learning</span></div></div></section>
 
-          {/* scanning line */}
-          <div style={{ position: 'absolute', left: 0, right: 0, height: 1, background: 'linear-gradient(90deg, transparent, rgba(0,212,255,0.4), transparent)', animation: 'scan 6s linear infinite', pointerEvents: 'none', zIndex: 1 }} />
+      <section id="projects" className="projects-section section-wrap section-block"><SectionTitle kicker="Selected work" title="Products built around real needs." copy="Three projects that show how I think across mobile UI, system architecture and everyday usability." /><div className="project-stack">{PROJECTS.map((project) => <article className="project-card" key={project.name} style={{ "--project-color": project.color } as React.CSSProperties}><div className="project-topline"><span>{project.year}</span><span>{project.type}</span></div><div className="project-grid"><div className="project-copy"><p className="project-alias">{project.alias}</p><h3>{project.name}</h3><p className="project-description">{project.description}</p><div className="project-links">{project.github ? <ArrowButton href={project.github}>View source</ArrowButton> : <span className="private-label">Private client work</span>}{project.website && <a className="text-link" href={project.website} target="_blank" rel="noreferrer">Live product <ArrowUpRight size={16} /></a>}</div></div><div className="project-details"><ul>{project.highlights.map((item) => <li key={item}><Check size={18} weight="bold" />{item}</li>)}</ul><div className="tech-list">{project.tech.map((item) => <span key={item}>{item}</span>)}</div></div></div></article>)}</div></section>
 
-          {/* corner brackets */}
-          {[['top-24 left-6', 'border-t border-l'], ['top-24 right-6', 'border-t border-r'], ['bottom-20 left-6', 'border-b border-l'], ['bottom-20 right-6', 'border-b border-r']].map(([pos, borders]) => (
-            <div key={pos} className={`absolute ${pos} ${borders} w-8 h-8 hidden md:block`} style={{ borderColor: 'rgba(0,212,255,0.25)' }} />
-          ))}
-
-          <div className="max-w-6xl w-full" style={{ position: 'relative', zIndex: 2 }}>
-            <div className="flex flex-col-reverse md:flex-row items-center md:items-end gap-8 md:gap-0">
-
-              {/* ── Text side ── */}
-              <div className="flex-1 md:pr-8">
-                <p className="mono text-xs tracking-[0.3em] uppercase mb-3" style={{ color: '#00d4ff' }}>
-                  {typedRole}<span style={{ animation: 'blink 0.8s step-end infinite', opacity: roleDone ? 0 : 1 }}>_</span>
-                </p>
-                <p className="mono text-xs tracking-[0.2em] mb-8" style={{ color: '#1e4a5a' }}>
-                  📍 {typedLoc}
-                </p>
-
-                <h1 style={{ fontSize: 'clamp(44px, 8vw, 110px)', fontWeight: 900, lineHeight: 0.9, letterSpacing: '-0.03em', color: '#ddeef5' }}>
-                  Ưng Đỗ<br />
-                  <GlitchText style={{ color: '#00d4ff', textShadow: '0 0 40px rgba(0,212,255,0.4), 0 0 80px rgba(0,150,255,0.15)' }}>
-                    Thế Vinh
-                  </GlitchText>
-                </h1>
-
-<p className="mt-8 max-w-xl text-base leading-relaxed" style={{ color: '#5a8fa0' }}>
-                  Final-year IT student specializing in Android development. Skilled in Kotlin and modern Android frameworks, with practical experience in biometric SDK integration at IriTech. Quick learner, adaptable, and driven to create meaningful mobile applications.
-                </p>
-
-                <div className="flex flex-wrap gap-4 mt-10">
-                  <a href="mailto:ungdothevinh4704@gmail.com" className="mono text-sm px-6 py-3 transition-all hover:scale-105"
-                    style={{ background: '#00d4ff', color: '#000', textDecoration: 'none', fontWeight: 700, boxShadow: '0 0 24px rgba(0,212,255,0.4), 0 0 60px rgba(0,150,255,0.15)' }}>
-                    Get In Touch →
-                  </a>
-                  <a href="https://github.com/vinh0407" target="_blank" rel="noreferrer" className="mono text-sm px-6 py-3 transition-all hover:border-[#00d4ff] hover:text-[#00d4ff]"
-                    style={{ border: '1px solid #0d2a3a', color: '#5a8fa0', textDecoration: 'none' }}>
-                    GitHub ↗
-                  </a>
-                </div>
-
-                {/* stats */}
-                <div className="flex flex-wrap gap-10 mt-14">
-                  {[
-                    { label: 'Projects Built', val: 3, suffix: '+' },
-                    { label: 'Devices Tested', val: 10, suffix: '+' },
-                    { label: 'Months Intern', val: 4, suffix: '' },
-                    { label: 'Years Coding', val: 2, suffix: '+' },
-                  ].map(({ label, val, suffix }) => (
-                    <div key={label}>
-                      <p className="mono text-3xl font-black" style={{ color: '#00d4ff', textShadow: '0 0 16px rgba(0,212,255,0.5)' }}>
-                        <Counter to={val} suffix={suffix} />
-                      </p>
-                      <p className="mono text-xs mt-1" style={{ color: '#1e4a5a' }}>{label}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* ── Tech Icons Cluster ── */}
-              <div className="relative flex-shrink-0 flex items-center justify-center" style={{ width: 'clamp(280px, 32vw, 420px)', height: 'clamp(280px, 32vw, 420px)' }}>
-
-                {/* outer orbit ring */}
-                <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', border: '1px solid rgba(0,212,255,0.1)', animation: 'ring-spin 28s linear infinite' }}>
-                  <div style={{ position: 'absolute', top: -4, left: '50%', transform: 'translateX(-50%)', width: 8, height: 8, borderRadius: '50%', background: '#00d4ff', boxShadow: '0 0 12px #00d4ff, 0 0 24px rgba(0,212,255,0.5)' }} />
-                </div>
-                {/* inner orbit ring */}
-                <div style={{ position: 'absolute', inset: '14%', borderRadius: '50%', border: '1px dashed rgba(0,160,220,0.08)', animation: 'ring-spin-rev 18s linear infinite' }}>
-                  <div style={{ position: 'absolute', bottom: -3, right: '18%', width: 5, height: 5, borderRadius: '50%', background: 'rgba(0,212,255,0.6)', boxShadow: '0 0 8px #00d4ff' }} />
-                </div>
-
-                {/* centre ambient glow */}
-                <div style={{ position: 'absolute', inset: '20%', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,212,255,0.07) 0%, transparent 70%)', filter: 'blur(12px)' }} />
-
-                {/* ── Android icon — top centre ── */}
-                <div style={{ position: 'absolute', top: '4%', left: '50%', transform: 'translateX(-50%)', animation: 'float 3.8s ease-in-out infinite' }}>
-                  <div style={{ width: 96, height: 96, borderRadius: 20, background: '#020f1c', border: '1px solid rgba(0,212,255,0.22)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 24px rgba(0,212,255,0.15), inset 0 0 20px rgba(0,212,255,0.04)' }}>
-                    <svg viewBox="0 0 48 48" width="52" height="52" aria-label="Android">
-                      <defs>
-                        <filter id="gA"><feGaussianBlur stdDeviation="1.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                      </defs>
-                      {/* antenna left */}
-                      <line x1="16" y1="11" x2="10" y2="4" stroke="#00d4ff" strokeWidth="2.2" strokeLinecap="round" filter="url(#gA)" />
-                      <circle cx="10" cy="3.5" r="1.8" fill="#00d4ff" filter="url(#gA)" />
-                      {/* antenna right */}
-                      <line x1="32" y1="11" x2="38" y2="4" stroke="#00d4ff" strokeWidth="2.2" strokeLinecap="round" filter="url(#gA)" />
-                      <circle cx="38" cy="3.5" r="1.8" fill="#00d4ff" filter="url(#gA)" />
-                      {/* head/body */}
-                      <path d="M8 20 Q8 12 24 12 Q40 12 40 20 L40 34 Q40 38 36 38 L12 38 Q8 38 8 34 Z" fill="none" stroke="#00d4ff" strokeWidth="1.8" filter="url(#gA)" />
-                      {/* eyes */}
-                      <circle cx="18" cy="22" r="2.5" fill="#00d4ff" filter="url(#gA)" />
-                      <circle cx="30" cy="22" r="2.5" fill="#00d4ff" filter="url(#gA)" />
-                      {/* left arm */}
-                      <path d="M8 21 Q3 21 3 27 Q3 33 8 33" fill="none" stroke="#00d4ff" strokeWidth="1.8" strokeLinecap="round" filter="url(#gA)" />
-                      {/* right arm */}
-                      <path d="M40 21 Q45 21 45 27 Q45 33 40 33" fill="none" stroke="#00d4ff" strokeWidth="1.8" strokeLinecap="round" filter="url(#gA)" />
-                      {/* legs */}
-                      <line x1="17" y1="38" x2="17" y2="45" stroke="#00d4ff" strokeWidth="2" strokeLinecap="round" filter="url(#gA)" />
-                      <line x1="31" y1="38" x2="31" y2="45" stroke="#00d4ff" strokeWidth="2" strokeLinecap="round" filter="url(#gA)" />
-                    </svg>
-                  </div>
-                  <p className="mono text-center text-xs mt-2" style={{ color: 'rgba(0,212,255,0.55)', letterSpacing: '0.15em' }}>ANDROID</p>
-                </div>
-
-                {/* ── Web icon — bottom left ── */}
-                <div style={{ position: 'absolute', bottom: '6%', left: '5%', animation: 'float 4.5s ease-in-out infinite', animationDelay: '1s' }}>
-                  <div style={{ width: 96, height: 96, borderRadius: 20, background: '#020f1c', border: '1px solid rgba(0,212,255,0.22)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 24px rgba(0,212,255,0.15), inset 0 0 20px rgba(0,212,255,0.04)' }}>
-                    <svg viewBox="0 0 48 48" width="52" height="52" aria-label="Web">
-                      <defs>
-                        <filter id="gW"><feGaussianBlur stdDeviation="1.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                      </defs>
-                      {/* globe circle */}
-                      <circle cx="24" cy="24" r="18" fill="none" stroke="#00d4ff" strokeWidth="1.8" filter="url(#gW)" />
-                      {/* equator */}
-                      <line x1="6" y1="24" x2="42" y2="24" stroke="#00d4ff" strokeWidth="1.4" strokeDasharray="2,2" />
-                      {/* meridian */}
-                      <line x1="24" y1="6" x2="24" y2="42" stroke="#00d4ff" strokeWidth="1.4" strokeDasharray="2,2" />
-                      {/* left ellipse */}
-                      <path d="M24 6 Q14 16 14 24 Q14 32 24 42" fill="none" stroke="#00d4ff" strokeWidth="1.4" />
-                      {/* right ellipse */}
-                      <path d="M24 6 Q34 16 34 24 Q34 32 24 42" fill="none" stroke="#00d4ff" strokeWidth="1.4" />
-                      {/* centre dot */}
-                      <circle cx="24" cy="24" r="2.5" fill="#00d4ff" filter="url(#gW)" />
-                    </svg>
-                  </div>
-                  <p className="mono text-center text-xs mt-2" style={{ color: 'rgba(0,212,255,0.55)', letterSpacing: '0.15em' }}>WEB</p>
-                </div>
-
-                {/* ── iOS icon — bottom right ── */}
-                <div style={{ position: 'absolute', bottom: '6%', right: '5%', animation: 'float 4.2s ease-in-out infinite', animationDelay: '2s' }}>
-                  <div style={{ width: 96, height: 96, borderRadius: 20, background: '#020f1c', border: '1px solid rgba(0,212,255,0.22)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 24px rgba(0,212,255,0.15), inset 0 0 20px rgba(0,212,255,0.04)' }}>
-                    <svg viewBox="0 0 48 48" width="52" height="52" aria-label="iOS">
-                      <defs>
-                        <filter id="gI"><feGaussianBlur stdDeviation="1.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                      </defs>
-                      {/* phone outline */}
-                      <rect x="11" y="4" width="26" height="40" rx="5" fill="none" stroke="#00d4ff" strokeWidth="1.8" filter="url(#gI)" />
-                      {/* notch/dynamic island */}
-                      <rect x="18" y="7" width="12" height="4" rx="2" fill="none" stroke="#00d4ff" strokeWidth="1.4" />
-                      <circle cx="28" cy="9" r="1.2" fill="#00d4ff" filter="url(#gI)" />
-                      {/* screen content lines */}
-                      <line x1="16" y1="18" x2="32" y2="18" stroke="#00d4ff" strokeWidth="1.2" strokeLinecap="round" opacity="0.6" />
-                      <line x1="16" y1="22" x2="28" y2="22" stroke="#00d4ff" strokeWidth="1.2" strokeLinecap="round" opacity="0.4" />
-                      <line x1="16" y1="26" x2="30" y2="26" stroke="#00d4ff" strokeWidth="1.2" strokeLinecap="round" opacity="0.5" />
-                      {/* app icon grid */}
-                      <rect x="16" y="30" width="6" height="6" rx="1.5" fill="none" stroke="#00d4ff" strokeWidth="1" opacity="0.5" />
-                      <rect x="24" y="30" width="6" height="6" rx="1.5" fill="none" stroke="#00d4ff" strokeWidth="1" opacity="0.5" />
-                      {/* home indicator */}
-                      <line x1="20" y1="41" x2="28" y2="41" stroke="#00d4ff" strokeWidth="2" strokeLinecap="round" filter="url(#gI)" />
-                    </svg>
-                  </div>
-                  <p className="mono text-center text-xs mt-2" style={{ color: 'rgba(0,212,255,0.55)', letterSpacing: '0.15em' }}>iOS</p>
-                </div>
-
-                {/* connecting lines between icons */}
-                <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', opacity: 0.18 }} viewBox="0 0 420 420">
-                  <line x1="210" y1="100" x2="100" y2="340" stroke="#00d4ff" strokeWidth="1" strokeDasharray="4,6" />
-                  <line x1="210" y1="100" x2="320" y2="340" stroke="#00d4ff" strokeWidth="1" strokeDasharray="4,6" />
-                  <line x1="100" y1="340" x2="320" y2="340" stroke="#00d4ff" strokeWidth="1" strokeDasharray="4,6" />
-                </svg>
-
-              </div>
-
-            </div>
-          </div>
-        </section>
-
-        {/* EXPERIENCE */}
-        <section id="experience" className="px-6 md:px-16 lg:px-24 py-24" style={{ borderBottom: '1px solid #0a1f30' }}>
-          <div className="max-w-5xl mx-auto">
-            <FadeIn>
-              <SectionLabel>02 / Work Experience</SectionLabel>
-              <Rule />
-            </FadeIn>
-            <FadeIn delay={0.1}>
-              <div className="grid md:grid-cols-[200px_1fr] gap-8 md:gap-16">
-                <div>
-                  <p className="mono text-xs" style={{ color: '#1e4a5a' }}>Period</p>
-                  <p className="mono text-sm mt-1" style={{ color: '#00d4ff', textShadow: '0 0 10px rgba(0,212,255,0.4)' }}>Apr 2025 — Jul 2025</p>
-                  <p className="mono text-xs mt-4" style={{ color: '#1e4a5a' }}>Location</p>
-                  <p className="text-sm mt-1" style={{ color: '#5a8fa0' }}>Ho Chi Minh, Vietnam</p>
-                </div>
-                <div className="border-l pl-8 md:pl-12" style={{ borderColor: '#0a1f30' }}>
-                  <div className="flex items-start justify-between gap-4 flex-wrap">
-                    <div>
-                      <h3 className="text-xl font-bold" style={{ color: '#ddeef5' }}>Android Intern</h3>
-                      <p className="mono text-sm mt-1" style={{ color: '#00d4ff' }}>IRITECH VIETNAM</p>
-                    </div>
-                    <span className="mono text-xs px-3 py-1 tag-chip" style={{ border: '1px solid #0a1f30', color: '#2d5a6a' }}>Full-time Internship</span>
-                  </div>
-                  <ul className="mt-6 space-y-3">
-                    {[
-                      'Integrated IriShield biometric SDK into Android applications using Kotlin and Android SDK.',
-                      'Developed and maintained UI screens with Jetpack Compose following MVVM architecture.',
-                      'Used Coroutines for asynchronous biometric processing and optimized user interactions.',
-                      'Tested biometric authentication on 10+ Android devices and resolved compatibility issues.',
-                      'Collaborated with senior engineers using Git and Agile workflow to deliver production-ready features.',
-                    ].map((pt, i) => (
-                      <li key={i} className="flex gap-3 text-sm leading-relaxed" style={{ color: '#5a8fa0' }}>
-                        <span className="mono shrink-0" style={{ color: '#00d4ff', marginTop: 2 }}>›</span>{pt}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </FadeIn>
-          </div>
-        </section>
-
-        {/* SKILLS */}
-        <section id="skills" className="px-6 md:px-16 lg:px-24 py-24" style={{ borderBottom: '1px solid #0a1f30' }}>
-          <div className="max-w-5xl mx-auto">
-            <FadeIn>
-              <SectionLabel>03 / Skills</SectionLabel>
-              <Rule />
-            </FadeIn>
-            <div className="grid md:grid-cols-2 gap-12 md:gap-16">
-              <div>
-                <FadeIn delay={0.1} from="left">
-                  <h3 className="mono text-xs tracking-widest uppercase mb-6" style={{ color: '#1e4a5a' }}>Hard Skills</h3>
-                  <div className="space-y-6">
-                    {Object.entries(SKILLS).map(([cat, items]) => (
-                      <div key={cat}>
-                        <p className="mono text-xs mb-2" style={{ color: '#2d5a6a' }}>{cat}</p>
-                        <div className="flex flex-wrap gap-2">
-                          {items.map(s => (
-                            <span key={s} className="mono text-xs px-3 py-1.5 tag-chip transition-all hover:text-[#00d4ff] cursor-default"
-                              style={{ border: '1px solid #0a1f30', color: '#5a8fa0' }}>
-                              {s}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </FadeIn>
-              </div>
-              <div>
-                <FadeIn delay={0.2} from="right">
-                  <h3 className="mono text-xs tracking-widest uppercase mb-6" style={{ color: '#1e4a5a' }}>Soft Skills</h3>
-                  <ul className="space-y-4">
-                    {SOFT_SKILLS.map((s, i) => (
-                      <li key={s} className="flex items-center gap-4">
-                        <span className="mono text-xs w-6" style={{ color: '#0d2a3a' }}>0{i + 1}</span>
-                        <div className="flex-1 h-px" style={{ background: '#0a1f30' }} />
-                        <span className="text-sm" style={{ color: '#a8d0e0' }}>{s}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <h3 className="mono text-xs tracking-widest uppercase mt-12 mb-6" style={{ color: '#1e4a5a' }}>Languages</h3>
-                  <div className="space-y-4">
-                    {[{ lang: 'Vietnamese', level: 'Native', pct: 100 }, { lang: 'English', level: 'Intermediate', pct: 55 }].map(({ lang, level, pct }, i) => (
-                      <div key={lang}>
-                        <div className="flex justify-between mb-2">
-                          <span className="text-sm" style={{ color: '#a8d0e0' }}>{lang}</span>
-                          <span className="mono text-xs" style={{ color: '#2d5a6a' }}>{level}</span>
-                        </div>
-                        <SkillBar pct={pct} delay={i * 0.15 + 0.3} />
-                      </div>
-                    ))}
-                  </div>
-                </FadeIn>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* PROJECTS */}
-        <section id="projects" className="px-6 md:px-16 lg:px-24 py-24" style={{ borderBottom: '1px solid #0a1f30' }}>
-          <div className="max-w-5xl mx-auto">
-            <FadeIn>
-              <SectionLabel>04 / Projects</SectionLabel>
-              <Rule />
-            </FadeIn>
-            <div className="space-y-20">
-              {PROJECTS.map((p, idx) => (
-                <FadeIn key={p.name} delay={idx * 0.08}>
-                  <div className="group relative">
-                    {/* hover glow bar */}
-                    <div className="absolute left-0 top-0 bottom-0 w-px transition-all duration-500" style={{ background: 'linear-gradient(to bottom, transparent, #00d4ff, transparent)', opacity: 0, transform: 'scaleY(0)' }}
-                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = '1'; (e.currentTarget as HTMLElement).style.transform = 'scaleY(1)' }}
-                    />
-                    <div className="grid md:grid-cols-[80px_1fr] gap-6 md:gap-12">
-                      <div className="pt-1">
-                        <p className="mono text-xs" style={{ color: '#0d2a3a' }}>{p.year}</p>
-                      </div>
-                      <div className="border-t pt-8 transition-all duration-300 group-hover:border-[#00d4ff]" style={{ borderColor: '#0a1f30' }}>
-                        <div className="flex items-start justify-between gap-4 flex-wrap">
-                          <div>
-                            <h3 className="text-2xl font-bold leading-tight transition-all duration-300 group-hover:text-[#00d4ff]" style={{ color: '#ddeef5' }}>
-                              {p.name}
-                            </h3>
-                            <p className="mono text-xs mt-1" style={{ color: '#2d5a6a' }}>{p.subtitle}</p>
-                          </div>
-                          <div className="flex gap-2">
-                            {p.github ? (
-                              <a href={p.github} target="_blank" rel="noreferrer" className="mono text-xs px-4 py-2 shrink-0 transition-all hover:border-[#00d4ff] hover:text-[#00d4ff] hover:shadow-[0_0_16px_rgba(0,212,255,0.3)]"
-                                style={{ border: '1px solid #091e2d', color: '#2d5a6a', textDecoration: 'none' }}>
-                                GitHub ↗
-                              </a>
-                            ) : (
-                              <span className="mono text-xs px-4 py-2" style={{ border: '1px solid #091e2d', color: '#0d2a3a' }}>Private / NDA</span>
-                            )}
-                            {p.website && (
-                              <a href={p.website} target="_blank" rel="noreferrer" className="mono text-xs px-4 py-2 shrink-0 transition-all hover:border-[#00d4ff] hover:text-[#00d4ff] hover:shadow-[0_0_16px_rgba(0,212,255,0.3)]"
-                                style={{ border: '1px solid #091e2d', color: '#2d5a6a', textDecoration: 'none' }}>
-                                Live Demo ↗
-                              </a>
-                            )}
-                          </div>
-                        </div>
-                        <div className="flex flex-wrap gap-2 mt-4">
-                          {p.tech.map(t => (
-                            <span key={t} className="mono text-xs px-2 py-1 transition-all hover:shadow-[0_0_8px_rgba(0,212,255,0.3)]"
-                              style={{ background: '#030d18', color: '#00d4ff', border: '1px solid #0a1f30' }}>
-                              {t}
-                            </span>
-                          ))}
-                        </div>
-                        <ul className="mt-5 space-y-2">
-                          {p.points.map((pt, i) => (
-                            <li key={i} className="flex gap-3 text-sm leading-relaxed" style={{ color: '#3d6e80' }}>
-                              <span className="mono shrink-0" style={{ color: '#1e4a5a', marginTop: 2 }}>›</span>{pt}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* EDUCATION */}
-        <section className="px-6 md:px-16 lg:px-24 py-24" style={{ borderBottom: '1px solid #0a1f30' }}>
-          <div className="max-w-5xl mx-auto">
-            <FadeIn>
-              <SectionLabel>Education</SectionLabel>
-              <Rule />
-              <div className="p-8 max-w-xl" style={{ border: '1px solid #0a1f30', background: '#030d18', position: 'relative', overflow: 'hidden' }}>
-                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: 'linear-gradient(90deg, transparent, #00d4ff, transparent)' }} />
-                <p className="mono text-xs mb-2" style={{ color: '#1e4a5a' }}>2022 — 2026</p>
-                <h3 className="text-xl font-bold" style={{ color: '#ddeef5' }}>Information Technology</h3>
-                <p className="text-sm mt-2" style={{ color: '#5a8fa0' }}>University of Transport Ho Chi Minh City</p>
-              </div>
-            </FadeIn>
-          </div>
-        </section>
-
-        {/* CONTACT */}
-        <section id="contact" className="px-6 md:px-16 lg:px-24 py-32">
-          <div className="max-w-5xl mx-auto">
-            <FadeIn>
-              <SectionLabel>05 / Contact</SectionLabel>
-              <Rule />
-              <h2 style={{ fontSize: 'clamp(36px, 7vw, 88px)', fontWeight: 900, lineHeight: 0.9, letterSpacing: '-0.03em', color: '#ddeef5' }}>
-                Let"s build<br />
-                <GlitchText style={{ color: '#00d4ff', textShadow: '0 0 40px rgba(0,212,255,0.4)' }}>something</GlitchText>
-              </h2>
-              <div className="grid md:grid-cols-3 gap-6 mt-16">
-                {[
-                  { label: 'Email', value: 'ungdothevinh4704@gmail.com', onClick: handleCopy, actionLabel: copied ? '✓ Copied!' : 'Copy →' },
-                  { label: 'Phone', value: '(+84) 337244067', onClick: null, actionLabel: null },
-                  { label: 'GitHub', value: 'github.com/vinh0407', link: 'https://github.com/vinh0407', actionLabel: 'Visit →' },
-                ].map(({ label, value, onClick, actionLabel, link }) => (
-                  <div key={label} className="p-6 transition-all duration-300 hover:border-[#00d4ff] hover:shadow-[0_0_24px_rgba(0,212,255,0.1)] group"
-                    style={{ border: '1px solid #0a1f30', background: '#030d18', position: 'relative', overflow: 'hidden' }}>
-                    <div className="absolute inset-x-0 top-0 h-px transition-all duration-300 group-hover:opacity-100" style={{ background: 'linear-gradient(90deg, transparent, #00d4ff, transparent)', opacity: 0 }} />
-                    <p className="mono text-xs mb-3" style={{ color: '#1e4a5a' }}>{label}</p>
-                    <p className="text-sm break-all" style={{ color: '#a8d0e0' }}>{value}</p>
-                    {onClick && (
-                      <button onClick={onClick} className="mono text-xs mt-4 transition-colors hover:text-[#00d4ff]" style={{ color: '#2d5a6a' }}>{actionLabel}</button>
-                    )}
-                    {link && (
-                      <a href={link} target="_blank" rel="noreferrer" className="mono text-xs mt-4 block transition-colors hover:text-[#00d4ff]" style={{ color: '#2d5a6a', textDecoration: 'none' }}>{actionLabel}</a>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </FadeIn>
-          </div>
-        </section>
-
-        {/* FOOTER */}
-        <footer className="px-6 md:px-16 lg:px-24 py-8 flex flex-wrap items-center justify-between gap-4" style={{ borderTop: '1px solid #0a1f30' }}>
-          <span className="mono text-xs" style={{ color: '#0d2a3a' }}>© 2026 Ưng Đỗ Thế Vinh</span>
-          <span className="mono text-xs" style={{ color: '#091e2d' }}>Android Developer · Ho Chi Minh City</span>
-        </footer>
-      </div>
-    </>
-  )
+      <section className="section-wrap education-section"><div className="education-card reveal"><div><p className="kicker">Education</p><h2>Information Technology</h2></div><div><p>University of Transport Ho Chi Minh City</p><span>2022 to 2026</span></div></div></section>
+      <section id="contact" className="contact-section section-wrap"><div className="contact-copy reveal"><p className="kicker">Available for Android opportunities</p><h2>Have a useful idea?<br /><em>Let&apos;s make it move.</em></h2></div><div className="contact-actions reveal"><a className="contact-email" href="mailto:ungdothevinh4704@gmail.com">ungdothevinh4704@gmail.com</a><button className="copy-button" type="button" onClick={copyEmail} aria-label="Copy email address">{copied ? <Check size={18} weight="bold" /> : <Copy size={18} />} {copied ? "Copied" : "Copy email"}</button><a className="social-link" href="https://github.com/vinh0407" target="_blank" rel="noreferrer"><GithubLogo size={22} />GitHub</a></div></section>
+    </main>
+    <footer className="footer section-wrap"><span>© 2026 Ưng Đỗ Thế Vinh</span><span>Designed and built with care.</span></footer>
+  </div>;
 }
