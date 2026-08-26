@@ -15,6 +15,8 @@ import {
 gsap.registerPlugin(useGSAP)
 
 const EMAIL = "ungdothevinh4704@gmail.com"
+const PHONE = "+84 337 244 067"
+const LOCATION = "District 12, Ho Chi Minh City, Vietnam"
 const RESUME_URL = "/Ung-Do-The-Vinh-CV.pdf"
 const LINKEDIN_URL = "https://www.linkedin.com/in/vinhung474/"
 const NAV_ITEMS = [
@@ -27,6 +29,30 @@ const NAV_ITEMS = [
 ]
 
 const PROJECTS = [
+  {
+    name: "UTH Attendance System",
+    localName: "Facial Recognition Attendance Platform",
+    year: "2025",
+    type: "Web application",
+    role: "Full-stack developer",
+    problem:
+      "Classroom attendance needed a faster, more reliable workflow than manual check-ins, with clear records for students and administrators.",
+    solution:
+      "A Django-based attendance platform with a webcam kiosk, facial recognition, admin management, and a student portal for academic attendance data.",
+    contributions: [
+      "Built a webcam-based attendance kiosk with facial recognition and student verification using InsightFace and OpenCV.",
+      "Developed administration features for students, classes, subjects, schedules, and attendance sessions.",
+      "Implemented automatic on-time, late, and absent classification based on check-in time.",
+      "Created student views for schedules, grades, attendance history, and statistics, with CSV import/export and session archival.",
+    ],
+    technicalScope:
+      "Python, Django, InsightFace, ONNX Runtime, OpenCV, SQLite, HTML, CSS, JavaScript, Git",
+    verification:
+      "Public source is available for review. The implemented scope includes facial-recognition check-in, attendance workflows, and student and admin portals.",
+    status: "Source available",
+    github: "https://github.com/vinh0407/attendance-app",
+    live: null,
+  },
   {
     name: "Smart Room Search",
     localName: "Trọ Xịn",
@@ -81,12 +107,12 @@ const SKILL_GROUPS = [
   {
     label: "Programming",
     value:
-      "Kotlin across IriTech, PiggyBite, and Trọ Xịn. Java and Python are listed in the CV.",
+      "Kotlin, Java, and Python, with Kotlin used across IriTech, PiggyBite, and Trọ Xịn.",
   },
   {
     label: "Android",
     value:
-      "Compose, MVVM, and Coroutines across internship and project work. CameraX, ML Kit, Room, and Material Design 3 in PiggyBite.",
+      "Android Studio, Jetpack Compose (Basic), MVVM, and Coroutines across internship and project work. CameraX, ML Kit, Room, and Material Design 3 in PiggyBite.",
   },
   {
     label: "Web and API",
@@ -96,12 +122,12 @@ const SKILL_GROUPS = [
   {
     label: "Data",
     value:
-      "Firebase and Room in PiggyBite. TiDB and MySQL in Trọ Xịn. SQLite and Cloud Firestore are listed in the CV.",
+      "SQLite, Firebase Authentication, and Cloud Firestore in the CV; Firebase and Room in PiggyBite; TiDB and MySQL in Trọ Xịn.",
   },
   {
     label: "Workflow",
     value:
-      "Git and Agile collaboration at IriTech, plus teamwork.com and project-based version control.",
+      "Git, teamwork.com, and Agile basics, with collaborative delivery experience at IriTech.",
   },
 ]
 
@@ -282,7 +308,7 @@ export default function App() {
             </span>
             <span className="brand-copy">
               <strong>Ưng Đỗ Thế Vinh</strong>
-              <span>Frontend &amp; mobile developer</span>
+              <span>Android developer</span>
             </span>
           </a>
           <nav className="desktop-nav" aria-label="Primary navigation">
@@ -348,8 +374,8 @@ export default function App() {
               <span>Mobile experiences.</span>
             </h1>
             <p className="hero-summary">
-              Final-year IT student building responsive React interfaces and
-              Android applications, with hands-on biometric SDK experience.
+              Final-year IT student specializing in Android development, with
+              hands-on Kotlin, Jetpack Compose, and biometric SDK experience.
             </p>
             <div className="hero-actions">
               <a className="button button-primary" href="#work">
@@ -368,20 +394,20 @@ export default function App() {
           >
             <div className="sheet-header">
               <span>Candidate profile</span>
-              <span>HCMC, Vietnam</span>
+              <span>{LOCATION}</span>
             </div>
             <dl>
               <div>
                 <dt>Primary focus</dt>
-                <dd>Frontend and mobile development</dd>
+                <dd>Android development</dd>
               </div>
               <div>
                 <dt>Current status</dt>
-                <dd>Actively seeking an internship</dd>
+                <dd>Android developer intern</dd>
               </div>
               <div>
                 <dt>Target roles</dt>
-                <dd>Frontend, Android, or Flutter Intern</dd>
+                <dd>Android development intern</dd>
               </div>
               <div>
                 <dt>Work arrangement</dt>
@@ -389,7 +415,7 @@ export default function App() {
               </div>
               <div>
                 <dt>Evidence-backed stack</dt>
-                <dd>React, TypeScript, Kotlin, Compose</dd>
+                <dd>Kotlin, Jetpack Compose, MVVM</dd>
               </div>
             </dl>
             <div className="profile-links">
@@ -405,8 +431,8 @@ export default function App() {
           <div className="section-intro reveal">
             <h2>Selected work</h2>
             <p>
-              Two public projects show how I move from a user need to mobile UI,
-              data, and supporting services.
+              Three projects show how I move from a user need to recognition,
+              mobile UI, data, and supporting services.
             </p>
           </div>
           <div className="project-list">
@@ -478,10 +504,10 @@ export default function App() {
           <h2>Background &amp; career direction</h2>
           <div className="about-copy">
             <p>
-              I am a final-year Information Technology student focused on
-              frontend and mobile development. I build responsive web interfaces
-              with React and TypeScript, alongside native Android applications
-              with Kotlin and Jetpack Compose.
+              I am a final-year Information Technology student specializing in
+              Android development. I build native applications with Kotlin and
+              modern Android frameworks, alongside web applications with Python,
+              Django, React, and TypeScript.
             </p>
             <p>
               At IriTech Vietnam, I integrated the IriShield biometric SDK,
@@ -490,7 +516,7 @@ export default function App() {
               Android devices.
             </p>
             <p>
-              I am currently seeking Frontend, Android, or Flutter internship
+              I am currently seeking Android development internship
               opportunities in on-site or remote teams. I want to grow through
               production work that connects thoughtful interfaces with reliable
               application architecture.
@@ -548,14 +574,19 @@ export default function App() {
             <div>
               <h2>Start with the work. Continue with a conversation.</h2>
               <p>
-                I am looking for Frontend, Android, and Flutter internship
-                opportunities. Email or LinkedIn is the most direct way to reach
-                me.
+                I am looking for Android development internship opportunities.
+                Email or LinkedIn is the most direct way to reach me.
               </p>
             </div>
             <div className="contact-actions">
               <a className="contact-email" href={`mailto:${EMAIL}`}>
                 {EMAIL}
+              </a>
+              <a
+                className="contact-phone"
+                href={`tel:${PHONE.replace(/ /g, "")}`}
+              >
+                {PHONE}
               </a>
               <div>
                 <button
