@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ưng Đỗ Thế Vinh - Full-Stack Developer CV</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 12mm 16mm 12mm 16mm;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: "Times New Roman", Times, Georgia, serif;
+      font-size: 10pt;
+      line-height: 1.36;
+      color: #000000;
+      background: #ffffff;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .name {
+      font-size: 21pt;
+      font-weight: bold;
+      color: #000000;
+      margin-bottom: 2px;
+      letter-spacing: 0.01em;
+    }
+    .title {
+      font-size: 11pt;
+      font-weight: normal;
+      color: #000000;
+      margin-bottom: 6px;
+    }
+    .contacts {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      font-size: 9pt;
+      color: #000000;
+    }
+    .contact-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .contact-item svg {
+      width: 11px;
+      height: 11px;
+      fill: #000000;
+      flex-shrink: 0;
+    }
+    .contact-item a {
+      color: #000000;
+      text-decoration: none;
+    }
+
+    .section {
+      margin-bottom: 11px;
+    }
+    .section-title {
+      font-size: 11pt;
+      font-weight: bold;
+      color: #000000;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1.5px solid #000000;
+      padding-bottom: 1.5px;
+      margin-bottom: 6px;
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1.5px;
+    }
+    .item-left {
+      font-weight: bold;
+      color: #000000;
+      font-size: 10pt;
+    }
+    .item-right {
+      font-weight: bold;
+      color: #000000;
+      font-size: 9.5pt;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .item-sub {
+      font-weight: bold;
+      color: #000000;
+      font-size: 9.5pt;
+      margin-bottom: 2px;
+    }
+    .item-meta {
+      font-size: 9pt;
+      color: #000000;
+      margin-bottom: 2px;
+    }
+    .item-meta a {
+      color: #000000;
+      text-decoration: underline;
+    }
+
+    p.paragraph-text {
+      color: #000000;
+      text-align: justify;
+      font-size: 9.5pt;
+      line-height: 1.38;
+    }
+
+    ul.bullet-list {
+      list-style-type: disc;
+      padding-left: 17px;
+      margin-top: 2px;
+    }
+    ul.bullet-list li {
+      margin-bottom: 2px;
+      color: #000000;
+      text-align: justify;
+      font-size: 9.3pt;
+      line-height: 1.35;
+    }
+    ul.bullet-list li strong {
+      color: #000000;
+    }
+
+    .skills-layout {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 16px;
+      font-size: 9.2pt;
+      line-height: 1.4;
+    }
+    .skills-col-left {
+      font-weight: bold;
+      color: #000000;
+      text-transform: uppercase;
+      font-size: 9.5pt;
+    }
+    .skills-group-left {
+      margin-bottom: 14px;
+    }
+    .skills-col-right {
+      color: #000000;
+    }
+    .skills-group-right {
+      margin-bottom: 14px;
+    }
+    .skills-line {
+      margin-bottom: 2px;
+    }
+
+    .project-entry {
+      margin-bottom: 10px;
+      page-break-inside: avoid;
+    }
+
+    .languages-text {
+      font-size: 9.5pt;
+      color: #000000;
+    }
+    .languages-text span {
+      margin-right: 28px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="header">
+    <h1 class="name">Ưng Đỗ Thế Vinh</h1>
+    <div class="title">Full-Stack / Backend Developer</div>
+    <div class="contacts">
+      <span class="contact-item">
+        <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z"/></svg>
+        (+84) 337244067
+      </span>
+      <span class="contact-item">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        ungdothevinh4704@gmail.com
+      </span>
+      <span class="contact-item">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>
+        <a href="https://github.com/vinh0407" target="_blank">https://github.com/vinh0407</a>
+      </span>
+      <span class="contact-item">
+        <a href="https://portfolio-website-ung-vinh.vercel.app/" target="_blank">Portfolio: portfolio-website-ung-vinh.vercel.app</a>
+      </span>
+      <span class="contact-item">
+        District 12, Ho Chi Minh City, Vietnam
+      </span>
+    </div>
+  </header>
+
+  <!-- ==================== PROFILE ==================== -->
+  <section class="section">
+    <div class="section-title">PROFILE</div>
+    <p class="paragraph-text">
+      Final-year IT student specializing in Full-Stack and Backend software engineering. Proficient in TypeScript, Node.js, Python, and serverless edge runtimes. Proven ability to design resilient RESTful APIs, distributed databases (TiDB Cloud MySQL, PostgreSQL), DAG execution engines, and real-time WebSocket pipelines. Industry internship experience at IriTech Vietnam adhering to strict Agile/Git workflows.
+    </p>
+  </section>
+
+  <!-- ==================== EDUCATION ==================== -->
+  <section class="section">
+    <div class="section-title">EDUCATION</div>
+    <div class="item-header">
+      <span class="item-left">Information Technology</span>
+      <span class="item-right">2022 – 2026</span>
+    </div>
+    <div class="item-sub">University of Transport Ho Chi Minh City (UTH)</div>
+  </section>
+
+  <!-- ==================== WORK EXPERIENCE ==================== -->
+  <section class="section">
+    <div class="section-title">WORK EXPERIENCE</div>
+    <div class="item-header">
+      <span class="item-left">Ho Chi Minh, Viet Nam</span>
+      <span class="item-right">4/2025 – 7/2025</span>
+    </div>
+    <div class="item-sub">IRITECH VIETNAM - Software Engineer Intern</div>
+    <ul class="bullet-list">
+      <li>Integrated biometric scanner hardware SDKs into application codebases using asynchronous threading and callbacks.</li>
+      <li>Architected modular application logic following separation of concerns and clean architecture principles.</li>
+      <li>Designed and maintained RESTful API communication layers handling high-throughput payload serialization.</li>
+      <li>Executed compatibility and load testing across 10+ hardware environments, diagnosing runtime performance bottlenecks.</li>
+      <li>Collaborated with senior software architects using Git Flow, code reviews, and Agile sprint planning.</li>
+    </ul>
+  </section>
+
+  <!-- ==================== SKILLS ==================== -->
+  <section class="section">
+    <div class="section-title">SKILLS</div>
+    <div class="skills-layout">
+      <div class="skills-col-left">
+        <div class="skills-group-left">HARD SKILLS</div>
+        <div class="skills-group-left">SOFT SKILLS</div>
+      </div>
+      <div class="skills-col-right">
+        <div class="skills-group-right">
+          <div class="skills-line"><strong>Languages:</strong> TypeScript, JavaScript, Python, Kotlin, Java, SQL, HTML/CSS</div>
+          <div class="skills-line"><strong>Backend & Cloud:</strong> Node.js, Express, Cloudflare Workers (Edge), Django, RESTful API, WebSockets, JWT, Docker</div>
+          <div class="skills-line"><strong>Databases:</strong> TiDB Cloud (Distributed MySQL), PostgreSQL, SQLite, Firebase Realtime DB, Cloud Firestore</div>
+          <div class="skills-line"><strong>Frontend Stack:</strong> React 18/19, Next.js 16, Tailwind CSS, Zustand, @xyflow/react, Leaflet Maps</div>
+          <div class="skills-line"><strong>DevOps & Tools:</strong> Git, GitHub Actions CI/CD, Postman, Linux basics, Agile/Scrum</div>
+        </div>
+        <div class="skills-group-right">
+          <div class="skills-line">Systematic problem decomposition and clean architecture adherence</div>
+          <div class="skills-line">Effective cross-functional communication and proactive documentation</div>
+          <div class="skills-line">High adaptability to new tech stacks and production environments</div>
+          <div class="skills-line">Disciplined test-driven development and code maintainability</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TOP 3 FULL-STACK PROJECTS ==================== -->
+  <section class="section">
+    <div class="section-title">FEATURED FULL-STACK & BACKEND PROJECTS</div>
+
+    <!-- PROJECT 1: SMART ROOM SEARCH -->
+    <div class="project-entry">
+      <div class="item-header">
+        <span class="item-left">Smart Room Search — Trọ Xịn Platform (Full-Stack Cloud Architecture)</span>
+        <span class="item-right">2026</span>
+      </div>
+      <div class="item-meta">
+        <strong>GitHub:</strong> <a href="https://github.com/vinh0407/Smart-Room-Search" target="_blank">github.com/vinh0407/Smart-Room-Search</a> | <strong>Website:</strong> <a href="https://smart-room-search.vercel.app" target="_blank">smart-room-search.vercel.app</a>
+      </div>
+      <p class="paragraph-text" style="margin-bottom: 3px;">
+        Architected and deployed a multi-platform rental search ecosystem serving students and renters across Vietnam, featuring serverless cloud services and distributed data layers.
+      </p>
+      <ul class="bullet-list">
+        <li>Engineered a serverless RESTful API running on <strong>Cloudflare Workers</strong> edge runtime with stateless <strong>JWT authentication</strong> and geo-coordinate radius queries.</li>
+        <li>Designed high-availability distributed relational data layer on <strong>TiDB Cloud (Distributed MySQL)</strong> with automated schema migrations.</li>
+        <li>Implemented multi-channel ingestion pipelines that validate and aggregate rental listings with fraud prevention heuristics.</li>
+        <li>Built companion client interfaces: single-page web app in <strong>React 18 / TypeScript</strong> with Leaflet map clustering, and native <strong>Android APK</strong>.</li>
+        <li>Packaged development services with <strong>Docker Compose</strong> for standardized containerized local testing and CI/CD pipelines.</li>
+      </ul>
+    </div>
+
+    <!-- PROJECT 2: VINCEAUTON8N -->
+    <div class="project-entry" style="margin-top: 10px;">
+      <div class="item-header">
+        <span class="item-left">VinceAutoN8N — Workflow Automation Engine (Node.js & DAG Runtime)</span>
+        <span class="item-right">2026</span>
+      </div>
+      <div class="item-meta">
+        <strong>GitHub:</strong> <a href="https://github.com/vinh0407/VinceAutoN8N" target="_blank">github.com/vinh0407/VinceAutoN8N</a> | <strong>Status:</strong> Active Open-Source Runtime
+      </div>
+      <p class="paragraph-text" style="margin-bottom: 3px;">
+        Designed an extensible workflow automation platform inspired by n8n with an algorithmic Directed Acyclic Graph (DAG) execution engine.
+      </p>
+      <ul class="bullet-list">
+        <li>Engineered backend execution runtime in <strong>Node.js</strong> and <strong>TypeScript</strong> utilizing <strong>Topological Sorting</strong> and automated <strong>Cycle Detection</strong> algorithms.</li>
+        <li>Implemented bidirectional real-time telemetry streaming over <strong>WebSockets</strong>, broadcasting live node execution steps and payloads to connected clients.</li>
+        <li>Created modular connector framework supporting HTTP request nodes, webhook triggers, condition branching, and JSON transformation pipes.</li>
+        <li>Built an interactive visual designer in <strong>React 19</strong> and <strong>@xyflow/react</strong> with dynamic connection ports and Zustand state synchronization.</li>
+      </ul>
+    </div>
+
+    <!-- PROJECT 3: UTH ATTENDANCE -->
+    <div class="project-entry" style="margin-top: 10px;">
+      <div class="item-header">
+        <span class="item-left">UTH Attendance System — Biometric Authentication Platform</span>
+        <span class="item-right">2025</span>
+      </div>
+      <div class="item-meta">
+        <strong>GitHub:</strong> <a href="https://github.com/vinh0407/attendance-app" target="_blank">github.com/vinh0407/attendance-app</a>
+      </div>
+      <p class="paragraph-text" style="margin-bottom: 3px;">
+        Developed a university-grade attendance management system to streamline student check-ins and eliminate proxy roll calls through computer vision verification.
+      </p>
+      <ul class="bullet-list">
+        <li>Built scalable backend services using <strong>Python</strong> and <strong>Django</strong>, architecting relational schemas for departments, courses, schedules, and attendance sessions.</li>
+        <li>Integrated <strong>InsightFace (512D facial embedding vectors)</strong> and <strong>ONNX Runtime</strong> into check-in kiosks for sub-second student identity matching.</li>
+        <li>Engineered automated attendance classification logic (on-time, late, absent) with real-time absence quota alerts and administrative audit trails.</li>
+        <li>Implemented comprehensive REST API endpoints consumed by teacher consoles and student self-service portals.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ==================== LANGUAGES ==================== -->
+  <section class="section" style="margin-top: 10px; margin-bottom: 0;">
+    <div class="section-title">LANGUAGES</div>
+    <div class="languages-text">
+      <span><strong>Vietnamese:</strong> Native</span>
+      <span><strong>English:</strong> Intermediate (Technical reading, documentation & communication)</span>
+    </div>
+  </section>
+
+</body>
+</html>
