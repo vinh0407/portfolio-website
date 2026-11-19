@@ -4,7 +4,7 @@ Em tên là **Ưng Đỗ Thế Vinh**, hiện là sinh viên năm cuối chuyên
 
 Em viết thư này để bày tỏ mong muốn được ứng tuyển vào vị trí **Thực tập sinh Full-Stack / Backend Developer** tại Quý Công ty. Với tư duy kiến trúc hệ thống, khả năng làm việc tốt với Node.js, TypeScript, Python, cơ sở dữ liệu và kinh nghiệm làm việc theo quy trình Agile/Git Flow tại **IriTech Vietnam**, em rất hy vọng có cơ hội được học hỏi và đóng góp vào các dự án của Quý Công ty.
 
-Em xin gửi kèm CV và Thư xin việc (Cover Letter) trong tệp đính kèm. Quý Anh/Chị cũng có thể tham khảo thêm thông tin và các sản phẩm của em tại:
+Em xin gửi kèm CV trong tệp đính kèm. Quý Anh/Chị cũng có thể tham khảo thêm thông tin và các sản phẩm của em tại:
 - Portfolio: https://portfolio-website-ung-vinh.vercel.app/
 - GitHub: https://github.com/vinh0407
 
