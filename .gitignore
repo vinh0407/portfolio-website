@@ -9,5 +9,7 @@ vite.config.*.timestamp-*
 *-debug.log*
 logs/
 *.log
+public/apks/
+cv_template*.html
 .claude-replay.*
 .tmp-*

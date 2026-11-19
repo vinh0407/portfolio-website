@@ -2,16 +2,21 @@ import { useEffect, useRef, useState } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import {
+  AndroidLogo,
   ArrowRight,
   ArrowUpRight,
   Check,
   Copy,
   DownloadSimple,
+  GithubLogo,
+  Globe,
+  Images,
   List,
   Moon,
   Sun,
   X,
 } from "@phosphor-icons/react"
+
 gsap.registerPlugin(useGSAP)
 
 const EMAIL = "ungdothevinh4704@gmail.com"
@@ -19,6 +24,8 @@ const PHONE = "+84 337 244 067"
 const LOCATION = "District 12, Ho Chi Minh City, Vietnam"
 const RESUME_URL = "/Ung-Do-The-Vinh-CV.pdf"
 const LINKEDIN_URL = "https://www.linkedin.com/in/vinhung474/"
+const GITHUB_PROFILE_URL = "https://github.com/vinh0407"
+
 const NAV_ITEMS = [
   { label: "Work", href: "#work" },
   { label: "Experience", href: "#experience" },
@@ -28,136 +35,364 @@ const NAV_ITEMS = [
   { label: "Contact", href: "#contact" },
 ]
 
-const PROJECTS = [
-  {
-    name: "UTH Attendance System",
-    localName: "Facial Recognition Attendance Platform",
-    year: "2025",
-    type: "Web application",
-    role: "Full-stack developer",
-    problem:
-      "Classroom attendance needed a faster, more reliable workflow than manual check-ins, with clear records for students and administrators.",
-    solution:
-      "A Django-based attendance platform with a webcam kiosk, facial recognition, admin management, and a student portal for academic attendance data.",
-    contributions: [
-      "Built a webcam-based attendance kiosk with facial recognition and student verification using InsightFace and OpenCV.",
-      "Developed administration features for students, classes, subjects, schedules, and attendance sessions.",
-      "Implemented automatic on-time, late, and absent classification based on check-in time.",
-      "Created student views for schedules, grades, attendance history, and statistics, with CSV import/export and session archival.",
-    ],
-    technicalScope:
-      "Python, Django, InsightFace, ONNX Runtime, OpenCV, SQLite, HTML, CSS, JavaScript, Git",
-    verification:
-      "Public source is available for review. The implemented scope includes facial-recognition check-in, attendance workflows, and student and admin portals.",
-    status: "Source available",
-    github: "https://github.com/vinh0407/attendance-app",
-    live: null,
-  },
-  {
-    name: "Smart Room Search",
-    localName: "Trọ Xịn",
-    year: "2026",
-    type: "Full-stack web and Android application",
-    role: "Full-stack web and Android developer",
-    problem:
-      "Room discovery, tenant workflows, and property administration needed to work across web, mobile, and one shared backend.",
-    solution:
-      "A multi-platform rental search and management system with a tenant website, admin dashboard, native Android app, and shared REST API.",
-    contributions: [
-      "Built responsive React and TypeScript experiences for search, filtering, maps, favorites, and rental management.",
-      "Developed the native Android app with Kotlin and Jetpack Compose, including offline favorites and admin features.",
-      "Built the Node.js, Express, and Cloudflare Workers API with JWT authentication and role-based administration.",
-      "Designed the TiDB Cloud and MySQL data layer, then integrated geocoding, image upload, analytics, and AI-assisted room entry.",
-    ],
-    technicalScope:
-      "React, TypeScript, Vite, Kotlin, Jetpack Compose, Node.js, Express.js, Cloudflare Workers, TiDB, MySQL, JWT, REST API, Vercel",
-    verification:
-      "Public source and a live Vercel deployment are available for review. Offline favorites and role-based administration are part of the implemented scope.",
-    status: "Source and live product available",
-    github: "https://github.com/vinh0407/smart-room-search",
-    live: "https://smart-room-search.vercel.app",
-  },
-  {
-    name: "PiggyBite",
-    localName: "Smart Personal Finance Manager",
-    year: "2026",
-    type: "Native Android application",
-    role: "Android developer",
-    problem:
-      "Everyday financial records are slow to enter and difficult to keep useful across wallets, transactions, and shared saving goals.",
-    solution:
-      "An Android finance manager that turns receipt scans and Vietnamese voice input into structured transactions with online sync and offline storage.",
-    contributions: [
-      "Implemented Firebase Authentication with email, password, and phone sign-in.",
-      "Built expense, income, wallet, and shared saving fund workflows with Firebase Realtime Database.",
-      "Integrated Google ML Kit OCR, CameraX, and Vietnamese voice recognition for transaction input.",
-      "Developed analytics, transaction history, CSV import and export, Room storage, and a maintainable MVVM architecture.",
-    ],
-    technicalScope:
-      "Kotlin, Jetpack Compose, MVVM, Coroutines, Firebase, Room, CameraX, Google ML Kit, Material Design 3",
-    verification:
-      "Public source is available for review. The implemented scope includes Room storage, Firebase synchronization, analytics, and CSV import and export.",
-    status: "Source available",
-    github: "https://github.com/vinh0407/PiggyBite",
-    live: null,
-  },
-].sort((a, b) => Number(b.year) - Number(a.year))
+export interface ProjectScreenshot {
+  url: string
+  caption: string
+  isMobile?: boolean
+}
 
-const SKILL_GROUPS = [
+export interface ProjectItem {
+  id: string
+  name: string
+  localName: string
+  year: string
+  type: string
+  categories: ("mobile" | "ai-systems" | "fullstack")[]
+  tags: string[]
+  role: string
+  problem: string
+  solution: string
+  contributions: string[]
+  technicalScope: string
+  verification: string
+  status: string
+  links: {
+    github: string
+    live?: string
+    admin?: string
+    apk?: string
+  }
+  screenshots: ProjectScreenshot[]
+}
+
+const PROJECTS: ProjectItem[] = [
   {
-    label: "Programming",
-    value:
-      "Kotlin, Java, and Python, with Kotlin used across IriTech, PiggyBite, and Trọ Xịn.",
+    id: "piggybite",
+    name: "PiggyBite",
+    localName: "Smart, Privacy-First Personal Finance Manager for Android",
+    year: "2026",
+    type: "Native Android Application",
+    categories: ["mobile"],
+    tags: [
+      "Kotlin",
+      "Jetpack Compose",
+      "Material 3",
+      "Room SQLite",
+      "Firebase",
+      "CameraX",
+      "ML Kit",
+      "VietQR",
+    ],
+    role: "Android Developer",
+    problem:
+      "Tracking daily expenses manually is tedious, prone to manual entry mistakes, and disconnected from bank transfers, dynamic QR payments, and multi-wallet planning.",
+    solution:
+      "A privacy-first Android personal finance manager featuring VietQR camera scanning, Google ML Kit OCR receipt parsing, Vietnamese voice input, frosted glass UI, OLED dark mode, and an offline-first Room SQLite architecture synchronized with Firebase Realtime Database.",
+    contributions: [
+      "Built the native Android interface in Kotlin with Jetpack Compose, Material Design 3, frosted glass balance cards, and a pure OLED dark theme.",
+      "Integrated CameraX and Google ML Kit OCR for instant receipt parsing, along with native VietQR camera scanning and Vietnamese voice recognition.",
+      "Architected an offline-first data layer with Room SQLite, Kotlin Coroutines, and real-time cloud synchronization via Firebase Auth and Realtime Database.",
+      "Implemented financial analytics: category spending donut charts, 6-month cashflow bars, Monthly Wrapped infographics, and CSV/backup export.",
+      "Published signed production binaries (v1.0.1 APK & Google Play AAB Bundle) with SHA-256 certificate verification.",
+    ],
+    technicalScope:
+      "Kotlin, Jetpack Compose, Material Design 3, MVVM, Room DB, Coroutines, Firebase Auth & Realtime DB, CameraX, Google ML Kit OCR, VietQR",
+    verification:
+      "Official production release v1.0.1 (APK & AAB) signed and verifiable on GitHub Releases with checksums; complete screenshot gallery in repository.",
+    status: "v1.0.1 Released (APK Available)",
+    links: {
+      github: "https://github.com/vinh0407/PiggyBite",
+      apk: "https://github.com/vinh0407/PiggyBite/raw/main/APK/PiggyBite-v1.0.1.apk",
+    },
+    screenshots: [
+      {
+        url: "https://media.githubusercontent.com/media/vinh0407/PiggyBite/main/screenshots/01_home_screen.png",
+        caption: "Home Overview & Glassmorphism Balance Card",
+        isMobile: true,
+      },
+      {
+        url: "https://media.githubusercontent.com/media/vinh0407/PiggyBite/main/screenshots/02_home_dark_screen.png",
+        caption: "Pure OLED Dark Mode Interface",
+        isMobile: true,
+      },
+      {
+        url: "https://media.githubusercontent.com/media/vinh0407/PiggyBite/main/screenshots/04_reports_screen.png",
+        caption: "Spending Donut Chart & Cashflow Analytics",
+        isMobile: true,
+      },
+      {
+        url: "https://media.githubusercontent.com/media/vinh0407/PiggyBite/main/screenshots/06_scan_qr_screen.png",
+        caption: "CameraX VietQR Scanner Integration",
+        isMobile: true,
+      },
+    ],
   },
   {
-    label: "Android",
-    value:
-      "Android Studio, Jetpack Compose (Basic), MVVM, and Coroutines across internship and project work. CameraX, ML Kit, Room, and Material Design 3 in PiggyBite.",
+    id: "vinhcommand",
+    name: "VinhCommand",
+    localName: "Cross-Platform Dev Environment & Android Companion",
+    year: "2026",
+    type: "Cross-Platform System (Android & Windows Desktop)",
+    categories: ["mobile", "ai-systems"],
+    tags: [
+      "Kotlin",
+      "Jetpack Compose",
+      "Flutter/Dart",
+      "WebSocket",
+      "LAN Pairing",
+      "Local AI",
+      "Process Runner",
+    ],
+    role: "Lead System & Mobile Developer",
+    problem:
+      "Mobile developers and engineers need a way to inspect codebases, edit project files, dispatch AI agent prompts, and monitor build/runtime processes remotely over LAN without sitting in front of their desktop.",
+    solution:
+      "A unified client-host system connecting a Flutter Windows desktop IDE with a native Android companion app (Kotlin, Compose) via WebSocket/REST over LAN, featuring QR pairing, remote code canvas, local AI agent orchestration (Antigravity/Codex/OpenCode), and headless/native CMD execution.",
+    contributions: [
+      "Built the native Android companion app with Kotlin, Jetpack Compose, QR code pairing, and a VS Code Dark-inspired remote code canvas.",
+      "Implemented remote terminal control with dual execution modes on Windows host: headless background streaming and interactive native Windows CMD (chcp 65001 UTF-8).",
+      "Integrated desktop CLI AI engines (Google Antigravity, Codex, OpenCode) with real-time prompt dispatch, master task history, and file manipulation.",
+      "Architected low-latency LAN communication via HTTP Shelf engine and real-time WebSocket state synchronization.",
+    ],
+    technicalScope:
+      "Kotlin, Jetpack Compose, Flutter/Dart (Desktop), Windows API, WebSocket, HTTP REST, Local AI Orchestration, UTF-8 Process Runners",
+    verification:
+      "Public source code, interactive demo images, system architecture blueprints, and complete documentation available on GitHub.",
+    status: "Production Source Available",
+    links: {
+      github: "https://github.com/vinh0407/VinhCommand",
+      apk: "https://github.com/vinh0407/VinhCommand/raw/main/releases/Android/VinhCommand-Android-debug.apk",
+    },
+    screenshots: [
+      {
+        url: "https://raw.githubusercontent.com/vinh0407/VinhCommand/main/docs/images/desktop_ide_demo.jpg",
+        caption: "Windows Desktop IDE Workspace & Local AI Engine",
+        isMobile: false,
+      },
+      {
+        url: "https://raw.githubusercontent.com/vinh0407/VinhCommand/main/docs/images/mobile_app_demo.jpg",
+        caption: "Native Android Mobile Companion (VS Code Dark Canvas)",
+        isMobile: true,
+      },
+    ],
   },
   {
-    label: "Web and API",
-    value:
-      "React, TypeScript, Vite, Node.js, Express.js, Cloudflare Workers, REST API, and JWT in Trọ Xịn.",
+    id: "smart-room-search",
+    name: "Smart Room Search",
+    localName: "Trọ Xịn v2.0 (Nationwide Ecosystem)",
+    year: "2026",
+    type: "Full-Stack Web & Native Android Ecosystem",
+    categories: ["mobile", "fullstack"],
+    tags: [
+      "React 18",
+      "Kotlin",
+      "Jetpack Compose",
+      "Cloudflare Workers",
+      "TiDB Cloud",
+      "Leaflet",
+      "REST API",
+    ],
+    role: "Full-stack Web & Mobile Android Developer",
+    problem:
+      "Rental discovery across Vietnamese metropolises is scattered across fragmented listing websites with inaccurate location filters, broken mobile maps, and cumbersome tenant workflows.",
+    solution:
+      "A nationwide rental housing discovery ecosystem featuring cascading 3-tier filtering (Province/City -> District -> Ward), interactive OpenStreetMap exploration, multi-channel aggregation (Cho Tot, Batdongsan, Phongtro123 + verified direct landlords), a tenant web app, dedicated admin portal, and a native Android app.",
+    contributions: [
+      "Engineered responsive Tenant Web application and Admin Portal with React 18, Vite, and Tailwind CSS.",
+      "Developed native Android app in Kotlin and Jetpack Compose with offline favorites and resilient WebView Leaflet map rendering with multi-CDN fallbacks.",
+      "Built serverless REST API on Cloudflare Workers edge runtime and Node.js Express with TiDB Cloud distributed MySQL.",
+      "Designed cascading 3-tier administrative filter and multi-channel aggregation pipeline for major cities (HCMC, Hanoi, Da Nang, Can Tho, Binh Duong).",
+      "Published production-ready APK packages (v2.0 with nationwide catalog and performance optimizations).",
+    ],
+    technicalScope:
+      "React, TypeScript, Vite, Kotlin, Jetpack Compose, Cloudflare Workers, Node.js, Express, TiDB Cloud MySQL, Leaflet Maps, Vercel",
+    verification:
+      "Live deployments running on Vercel and Cloudflare Workers edge; production Android APK v2.0 published on GitHub for download.",
+    status: "Live Web & Production APK v2.0",
+    links: {
+      github: "https://github.com/vinh0407/Smart-Room-Search",
+      live: "https://smart-room-search.vercel.app",
+      admin: "https://smart-room-admin.vercel.app",
+      apk: "https://github.com/vinh0407/Smart-Room-Search/raw/main/APK/SmartRoomSearch-v2.0.apk",
+    },
+    screenshots: [],
   },
   {
-    label: "Data",
-    value:
-      "SQLite, Firebase Authentication, and Cloud Firestore in the CV; Firebase and Room in PiggyBite; TiDB and MySQL in Trọ Xịn.",
+    id: "vinceauto",
+    name: "VinceAuto",
+    localName: "Workflow Automation & AI Agent Orchestration Platform",
+    year: "2026",
+    type: "Full-Stack Monorepo & AI Orchestration Engine",
+    categories: ["ai-systems", "fullstack"],
+    tags: [
+      "React 19",
+      "TypeScript",
+      "@xyflow/react",
+      "Node.js",
+      "Express",
+      "Croner",
+      "WebSocket",
+      "LLM Agents",
+    ],
+    role: "Full-stack & Distributed Systems Developer",
+    problem:
+      "Automating multi-step business workflows and chaining modern AI agents requires visual flexibility, topological DAG execution, persistent background schedulers, and real-time execution feedback.",
+    solution:
+      "An extensible workflow automation and AI agent orchestration platform inspired by n8n architecture, featuring an interactive DAG visual canvas, multi-branch conditional routing, persistent Croner schedulers, native WebSocket log streaming, and seamless integration with OpenAI, Claude, Gemini, and Ollama.",
+    contributions: [
+      "Designed the reactive visual workflow canvas in React 19, TypeScript, and @xyflow/react with custom multi-output handles and interactive sticky notes.",
+      "Engineered the backend DAG topological evaluator in Node.js/Express with data pinning, partial node retries, and $json/$node expression resolution.",
+      "Implemented persistent cron scheduling with Croner, supporting recurring routines and ad-hoc job triggers.",
+      "Built native WebSocket server broadcasting real-time node execution progress, duration, payload items, and streaming console logs.",
+      "Integrated multi-provider LLM orchestration supporting OpenAI-compatible APIs, Anthropic Claude, Google Gemini, and local Ollama inference.",
+    ],
+    technicalScope:
+      "TypeScript Monorepo, React 19, Vite, @xyflow/react, Node.js, Express, Croner, WebSocket, LLM Orchestration, Tailwind CSS",
+    verification:
+      "Public repository on GitHub and live interactive canvas deployment running on Vercel.",
+    status: "Live Web Application Available",
+    links: {
+      github: "https://github.com/vinh0407/VinceAutoN8N",
+      live: "https://frontend-v-c621.vercel.app",
+    },
+    screenshots: [],
   },
   {
-    label: "Workflow",
-    value:
-      "Git, teamwork.com, and Agile basics, with collaborative delivery experience at IriTech.",
+    id: "uth-attendance",
+    name: "UTH Attendance System",
+    localName: "AI Facial Recognition Kiosk & Academic Operations Platform",
+    year: "2025",
+    type: "AI Computer Vision & Enterprise Web Application",
+    categories: ["ai-systems", "fullstack"],
+    tags: [
+      "Python",
+      "Django 4.2+",
+      "InsightFace",
+      "ONNX Runtime",
+      "OpenCV",
+      "Playwright",
+      "SQLite",
+      "Audit Logs",
+    ],
+    role: "Full-stack & AI Developer",
+    problem:
+      "Manual classroom attendance in universities is slow, vulnerable to proxy check-ins, and disconnected from academic credits, GPA audits, and exam eligibility criteria.",
+    solution:
+      "An enterprise-grade biometric attendance kiosk and academic management system standardized for university credit systems, featuring 512D face embeddings with InsightFace/ONNX Runtime, automated GPA/letter grading, real-time absence quota risk alerts, and digital leave request approvals.",
+    contributions: [
+      "Developed edge-capable biometric kiosk using InsightFace and ONNX Runtime for instant face detection, 512D vector matching, and anti-spoofing verification.",
+      "Engineered standardized 4-component academic grading engine (Attendance, Midterm, Final, Bonus) with automatic GPA 4.0 / letter grade conversions.",
+      "Built automated absence quota tracking against institutional thresholds (max 20% absence) with tiered risk statuses (Eligible, Warning, Barred).",
+      "Implemented student digital leave request workflows with evidence upload, 1-click administrative review, and automatic roster sync.",
+      "Developed administrative dashboard with CSV bulk grade management, Playwright automated testing, and immutable audit logs.",
+    ],
+    technicalScope:
+      "Python, Django 4.2+, InsightFace, ONNX Runtime, OpenCV, Playwright, SQLite, Bootstrap, JavaScript, CSV Validation",
+    verification:
+      "Public repository on GitHub with comprehensive documentation, architecture blueprints, test suites, and 7 interface screenshots.",
+    status: "Source Available with Test Suite",
+    links: {
+      github: "https://github.com/vinh0407/UTH-Attendance",
+    },
+    screenshots: [
+      {
+        url: "https://raw.githubusercontent.com/vinh0407/UTH-Attendance/main/docs/screenshots/01_admin_dashboard_overview.png",
+        caption: "Admin Operations Dashboard & KPI Analytics",
+        isMobile: false,
+      },
+      {
+        url: "https://raw.githubusercontent.com/vinh0407/UTH-Attendance/main/docs/screenshots/04_portal_home.png",
+        caption: "Student Academic Portal & Credit Management",
+        isMobile: false,
+      },
+      {
+        url: "https://raw.githubusercontent.com/vinh0407/UTH-Attendance/main/docs/screenshots/07_portal_attendance_warnings.png",
+        caption: "Real-time Attendance Quota & Exam Risk Warnings",
+        isMobile: false,
+      },
+    ],
   },
 ]
 
-function ExternalLink({
+const SKILL_GROUPS = [
+  {
+    label: "Android & Mobile",
+    value:
+      "Kotlin, Java, Jetpack Compose, Material Design 3, MVVM, Coroutines, Room SQLite, CameraX, Google ML Kit OCR, VietQR, Flutter/Dart companion app, and Biometric SDK integration (IriShield, InsightFace).",
+  },
+  {
+    label: "Systems & AI",
+    value:
+      "Local CLI AI agent orchestration (Google Antigravity, Codex, OpenCode), InsightFace & ONNX Runtime (512D facial vectors), DAG topological execution engine, Croner persistent scheduler, real-time WebSockets, and UTF-8 Windows shell runner.",
+  },
+  {
+    label: "Web & Full-Stack",
+    value:
+      "React 19, TypeScript, Next.js, Vite, Node.js, Express.js, Cloudflare Workers (edge runtime), Django 4.2+, Tailwind CSS, and @xyflow/react canvas.",
+  },
+  {
+    label: "Data & Storage",
+    value:
+      "TiDB Cloud distributed MySQL, Firebase (Auth, Realtime DB, Firestore), Room SQLite, SQLite3, and CSV bulk data validation.",
+  },
+  {
+    label: "Workflow & Quality",
+    value:
+      "Git, GitHub Releases & SHA-256 binary signing, Playwright automated testing, teamwork.com, and Agile/Scrum delivery experience at IriTech Vietnam.",
+  },
+]
+
+function ActionLink({
   href,
   children,
+  highlight = false,
+  download = false,
 }: {
   href: string
   children: React.ReactNode
+  highlight?: boolean
+  download?: boolean
 }) {
   return (
-    <a className="action-link" href={href} target="_blank" rel="noreferrer">
+    <a
+      className={`action-link ${highlight ? "action-link-highlight" : ""}`}
+      href={href}
+      target={download ? undefined : "_blank"}
+      rel={download ? undefined : "noreferrer"}
+      download={download ? true : undefined}
+    >
       {children}
-      <ArrowUpRight aria-hidden="true" size={17} weight="bold" />
+      {!download && <ArrowUpRight aria-hidden="true" size={16} weight="bold" />}
     </a>
   )
 }
 
-function ProjectCase({ project }: { project: typeof PROJECTS[number] }) {
+function ProjectCase({
+  project,
+  onOpenScreenshot,
+}: {
+  project: ProjectItem
+  onOpenScreenshot: (s: ProjectScreenshot) => void
+}) {
   return (
-    <article className="project-case reveal">
+    <article className="project-case reveal" id={`project-${project.id}`}>
       <header className="project-header">
         <div>
           <h3>{project.name}</h3>
           <p className="project-local-name">{project.localName}</p>
           <p className="project-type">{project.type}</p>
-          <p className="project-status">{project.status}</p>
+          <div className="project-badge-row">
+            <span className="project-status">{project.status}</span>
+            {project.tags.map((tag) => (
+              <span key={tag} className="project-tag-pill">
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
         <time dateTime={project.year}>{project.year}</time>
       </header>
+
       <div className="project-body">
         <dl className="project-brief">
           <div>
@@ -173,31 +408,101 @@ function ProjectCase({ project }: { project: typeof PROJECTS[number] }) {
             <dd>{project.role}</dd>
           </div>
         </dl>
+
         <div className="project-evidence">
-          <h4>Contribution</h4>
+          <h4>Key Contributions</h4>
           <ul>
             {project.contributions.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
+
           <div className="technical-scope-line">
-            <span>Technical scope</span>
+            <span>Technical Scope</span>
             <p>{project.technicalScope}</p>
           </div>
+
           <div className="verification-line">
-            <span>Verification</span>
+            <span>Verification &amp; Delivery</span>
             <p>{project.verification}</p>
           </div>
+
+          {/* Screenshot Showcase */}
+          {project.screenshots.length > 0 && (
+            <div className="project-gallery-wrap">
+              <div className="project-gallery-header">
+                <span className="project-gallery-title">
+                  <Images size={16} weight="bold" />
+                  Visual Showcase ({project.screenshots.length} Screenshots)
+                </span>
+                <span className="project-gallery-hint">
+                  Click thumbnail to enlarge
+                </span>
+              </div>
+              <div className="project-gallery-grid">
+                {project.screenshots.map((shot, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    className="gallery-card"
+                    onClick={() => onOpenScreenshot(shot)}
+                    aria-label={`Enlarge screenshot: ${shot.caption}`}
+                  >
+                    <div
+                      className={`gallery-img-box ${
+                        shot.isMobile ? "mobile-ratio" : ""
+                      }`}
+                    >
+                      <img
+                        src={shot.url}
+                        alt={shot.caption}
+                        loading="lazy"
+                        onError={(e) => {
+                          const target = e.currentTarget
+                          if (target.src.includes("raw.githubusercontent.com")) {
+                            target.src = target.src.replace(
+                              "https://raw.githubusercontent.com",
+                              "https://media.githubusercontent.com/media",
+                            )
+                          }
+                        }}
+                      />
+                    </div>
+                    <div className="gallery-card-caption">{shot.caption}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Project Action Links */}
           <div className="project-actions">
-            <ExternalLink href={project.github}>View source</ExternalLink>
-            {project.live && (
-              <ExternalLink href={project.live}>Open live product</ExternalLink>
+            <ActionLink href={project.links.github}>
+              <GithubLogo size={18} weight="bold" />
+              Source Code
+            </ActionLink>
+
+            {project.links.live && (
+              <ActionLink href={project.links.live} highlight>
+                <Globe size={18} weight="bold" />
+                Live Product
+              </ActionLink>
+            )}
+
+            {project.links.admin && (
+              <ActionLink href={project.links.admin}>
+                <Globe size={18} weight="bold" />
+                Admin Portal
+              </ActionLink>
+            )}
+
+            {project.links.apk && (
+              <ActionLink href={project.links.apk} highlight download>
+                <AndroidLogo size={18} weight="bold" />
+                Download APK
+              </ActionLink>
             )}
           </div>
-          <p className="asset-note">
-            [NEED INFO] Project screenshots or walkthrough media were not
-            provided.
-          </p>
         </div>
       </div>
     </article>
@@ -209,16 +514,23 @@ export default function App() {
   const menuButtonRef = useRef<HTMLButtonElement>(null)
   const firstMobileLinkRef = useRef<HTMLAnchorElement>(null)
   const copyTimerRef = useRef<number | null>(null)
+
   const [menuOpen, setMenuOpen] = useState(false)
+  const [selectedCategory, setSelectedCategory] = useState<
+    "all" | "mobile" | "ai-systems" | "fullstack"
+  >("all")
+  const [activeScreenshot, setActiveScreenshot] =
+    useState<ProjectScreenshot | null>(null)
   const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "error">(
     "idle",
   )
+
   const [theme, setTheme] = useState<"light" | "dark">(() => {
     try {
       const saved = localStorage.getItem("portfolio-theme")
       if (saved === "light" || saved === "dark") return saved
     } catch {
-      // Continue with the system preference when storage is unavailable.
+      // Continue with system preference
     }
     return window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
@@ -230,7 +542,7 @@ export default function App() {
     try {
       localStorage.setItem("portfolio-theme", theme)
     } catch {
-      // The selected theme still applies for this session.
+      // Session fallback
     }
   }, [theme])
 
@@ -241,21 +553,29 @@ export default function App() {
     [],
   )
 
+  // Handle escape key for mobile menu and lightbox
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : ""
-    if (menuOpen) firstMobileLinkRef.current?.focus()
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && menuOpen) {
-        setMenuOpen(false)
-        menuButtonRef.current?.focus()
+      if (event.key === "Escape") {
+        if (activeScreenshot) {
+          setActiveScreenshot(null)
+        } else if (menuOpen) {
+          setMenuOpen(false)
+          menuButtonRef.current?.focus()
+        }
       }
     }
     document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
+  }, [menuOpen, activeScreenshot])
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen || activeScreenshot ? "hidden" : ""
+    if (menuOpen) firstMobileLinkRef.current?.focus()
     return () => {
       document.body.style.overflow = ""
-      document.removeEventListener("keydown", handleKeyDown)
     }
-  }, [menuOpen])
+  }, [menuOpen, activeScreenshot])
 
   useGSAP(
     () => {
@@ -279,6 +599,7 @@ export default function App() {
   )
 
   const closeMenu = () => setMenuOpen(false)
+
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText(EMAIL)
@@ -290,11 +611,17 @@ export default function App() {
     copyTimerRef.current = window.setTimeout(() => setCopyStatus("idle"), 2400)
   }
 
+  const filteredProjects = PROJECTS.filter((p) => {
+    if (selectedCategory === "all") return true
+    return p.categories.includes(selectedCategory)
+  })
+
   return (
     <div ref={root} className="page-shell">
       <a className="skip-link" href="#main-content">
         Skip to content
       </a>
+
       <header className="site-header">
         <div className="header-inner">
           <a
@@ -308,9 +635,10 @@ export default function App() {
             </span>
             <span className="brand-copy">
               <strong>Ưng Đỗ Thế Vinh</strong>
-              <span>Android developer</span>
+              <span>Android &amp; Systems Developer</span>
             </span>
           </a>
+
           <nav className="desktop-nav" aria-label="Primary navigation">
             {NAV_ITEMS.map((item) => (
               <a key={item.href} href={item.href}>
@@ -318,6 +646,7 @@ export default function App() {
               </a>
             ))}
           </nav>
+
           <div className="header-actions">
             <button
               className="icon-button"
@@ -370,12 +699,14 @@ export default function App() {
         <section id="top" className="hero section-wrap">
           <div className="hero-copy">
             <h1>
-              <span>Frontend systems.</span>
-              <span>Mobile experiences.</span>
+              <span>Mobile systems.</span>
+              <span>Intelligent experiences.</span>
             </h1>
             <p className="hero-summary">
-              Final-year IT student specializing in Android development, with
-              hands-on Kotlin, Jetpack Compose, and biometric SDK experience.
+              Final-year IT student at UTH specializing in native Android
+              development (Kotlin, Jetpack Compose, CameraX, Room) and modern
+              cross-platform systems (Flutter, Local AI Orchestration,
+              Full-Stack &amp; Edge API).
             </p>
             <div className="hero-actions">
               <a className="button button-primary" href="#work">
@@ -388,6 +719,7 @@ export default function App() {
               </a>
             </div>
           </div>
+
           <aside
             className="profile-sheet"
             aria-label="Candidate profile summary"
@@ -399,49 +731,110 @@ export default function App() {
             <dl>
               <div>
                 <dt>Primary focus</dt>
-                <dd>Android development</dd>
+                <dd>Android &amp; Mobile Systems</dd>
               </div>
               <div>
                 <dt>Current status</dt>
-                <dd>Android developer intern</dd>
+                <dd>Final-year Student / Android Intern</dd>
               </div>
               <div>
                 <dt>Target roles</dt>
-                <dd>Android development intern</dd>
+                <dd>Android Developer (Intern / Junior)</dd>
               </div>
               <div>
                 <dt>Work arrangement</dt>
-                <dd>On-site or remote</dd>
+                <dd>On-site or Remote</dd>
               </div>
               <div>
-                <dt>Evidence-backed stack</dt>
-                <dd>Kotlin, Jetpack Compose, MVVM</dd>
+                <dt>Core stack</dt>
+                <dd>Kotlin, Compose, Room, MVVM, AI Tools</dd>
               </div>
             </dl>
             <div className="profile-links">
-              <ExternalLink href="https://github.com/vinh0407">
-                GitHub
-              </ExternalLink>
-              <ExternalLink href={LINKEDIN_URL}>LinkedIn</ExternalLink>
+              <ActionLink href={GITHUB_PROFILE_URL}>GitHub</ActionLink>
+              <ActionLink href={LINKEDIN_URL}>LinkedIn</ActionLink>
             </div>
           </aside>
         </section>
 
+        {/* Work Section with Filters and Live Data */}
         <section id="work" className="work-section section-wrap section-block">
           <div className="section-intro reveal">
             <h2>Selected work</h2>
             <p>
-              Three projects show how I move from a user need to recognition,
-              mobile UI, data, and supporting services.
+              Five production-ready projects demonstrating end-to-end delivery:
+              native Android engineering, local AI orchestration, biometric
+              pipelines, edge computing, and reactive visual canvases.
             </p>
           </div>
+
+          {/* Category Filter Tabs */}
+          <div className="project-filter-bar reveal">
+            <button
+              type="button"
+              className={`filter-tab ${
+                selectedCategory === "all" ? "active" : ""
+              }`}
+              onClick={() => setSelectedCategory("all")}
+            >
+              All Projects <span className="count">({PROJECTS.length})</span>
+            </button>
+            <button
+              type="button"
+              className={`filter-tab ${
+                selectedCategory === "mobile" ? "active" : ""
+              }`}
+              onClick={() => setSelectedCategory("mobile")}
+            >
+              <AndroidLogo size={14} weight="bold" />
+              Android &amp; Mobile (
+              {
+                PROJECTS.filter((p) => p.categories.includes("mobile")).length
+              }
+              )
+            </button>
+            <button
+              type="button"
+              className={`filter-tab ${
+                selectedCategory === "ai-systems" ? "active" : ""
+              }`}
+              onClick={() => setSelectedCategory("ai-systems")}
+            >
+              AI &amp; Systems (
+              {
+                PROJECTS.filter((p) => p.categories.includes("ai-systems"))
+                  .length
+              }
+              )
+            </button>
+            <button
+              type="button"
+              className={`filter-tab ${
+                selectedCategory === "fullstack" ? "active" : ""
+              }`}
+              onClick={() => setSelectedCategory("fullstack")}
+            >
+              Full-Stack Web (
+              {
+                PROJECTS.filter((p) => p.categories.includes("fullstack"))
+                  .length
+              }
+              )
+            </button>
+          </div>
+
           <div className="project-list">
-            {PROJECTS.map((project) => (
-              <ProjectCase key={project.name} project={project} />
+            {filteredProjects.map((project) => (
+              <ProjectCase
+                key={project.id}
+                project={project}
+                onOpenScreenshot={(s) => setActiveScreenshot(s)}
+              />
             ))}
           </div>
         </section>
 
+        {/* Experience Section */}
         <section
           id="experience"
           className="experience-section section-wrap section-block"
@@ -449,8 +842,8 @@ export default function App() {
           <div className="section-intro reveal">
             <h2>Industry experience</h2>
             <p>
-              Hands-on Android work with a biometric SDK and a cross-functional
-              engineering team.
+              Hands-on Android work with commercial biometric hardware SDKs and
+              a cross-functional engineering team.
             </p>
           </div>
           <article className="experience-record reveal">
@@ -468,35 +861,36 @@ export default function App() {
             </header>
             <div className="experience-grid">
               <p className="experience-lead">
-                Integrated IriShield biometric workflows into Android
+                Integrated IriShield biometric hardware workflows into Android
                 applications using Kotlin and the Android SDK.
               </p>
               <ul>
                 <li>
-                  Developed and maintained Jetpack Compose screens with MVVM
-                  architecture.
+                  Developed and maintained Jetpack Compose screens following
+                  MVVM architecture.
                 </li>
                 <li>
-                  Used Coroutines for asynchronous biometric processing and
-                  optimized user interactions.
+                  Used Kotlin Coroutines for asynchronous biometric processing,
+                  hardware callback handling, and optimized UI responsiveness.
                 </li>
                 <li>
-                  Tested authentication on more than ten Android devices and
-                  resolved compatibility issues.
+                  Tested biometric authentication across more than ten physical
+                  Android devices and resolved hardware compatibility issues.
                 </li>
                 <li>
-                  Collaborated with senior, backend, and SDK engineers through
-                  Git and Agile workflows.
+                  Collaborated with senior engineers, backend developers, and SDK
+                  teams through Git and Agile sprints.
                 </li>
               </ul>
             </div>
             <p className="confidential-note">
-              Confidential internship work: the project source is not publicly
-              available.
+              Confidential commercial work: hardware SDK implementation details
+              remain proprietary to IriTech Vietnam.
             </p>
           </article>
         </section>
 
+        {/* About Section */}
         <section
           id="about"
           className="about-section section-wrap section-block reveal"
@@ -504,26 +898,29 @@ export default function App() {
           <h2>Background &amp; career direction</h2>
           <div className="about-copy">
             <p>
-              I am a final-year Information Technology student specializing in
-              Android development. I build native applications with Kotlin and
-              modern Android frameworks, alongside web applications with Python,
-              Django, React, and TypeScript.
+              I am a final-year Information Technology student at the University
+              of Transport Ho Chi Minh City (UTH) with a dedicated focus on
+              native Android engineering. I specialize in building reactive,
+              reliable mobile applications with Kotlin, Jetpack Compose, Room
+              SQLite, and CameraX.
             </p>
             <p>
-              At IriTech Vietnam, I integrated the IriShield biometric SDK,
-              developed Compose screens, handled asynchronous processing with
-              Coroutines, and resolved compatibility issues across more than ten
-              Android devices.
+              During my internship at IriTech Vietnam, I integrated hardware
+              biometric SDKs, managed asynchronous processing with Coroutines,
+              and validated stability across multiple physical Android handsets.
+              Beyond mobile, I build cross-platform tools connecting Android
+              companions with desktop IDEs, AI agent orchestration engines, and
+              high-throughput edge APIs.
             </p>
             <p>
-              I am currently seeking Android development internship
-              opportunities in on-site or remote teams. I want to grow through
-              production work that connects thoughtful interfaces with reliable
-              application architecture.
+              I am actively seeking an Android Developer role (Internship or
+              Junior) in high-standard engineering teams, whether on-site in Ho
+              Chi Minh City or remote.
             </p>
           </div>
         </section>
 
+        {/* Skills Section */}
         <section
           id="skills"
           className="skills-section section-wrap section-block"
@@ -531,8 +928,8 @@ export default function App() {
           <div className="section-intro reveal">
             <h2>Technical range</h2>
             <p>
-              Skills listed here are supported by the CV, internship, or
-              selected project work.
+              Skills listed here are proven by production deployments, verified
+              GitHub repositories, or industry internship work.
             </p>
           </div>
           <dl className="skills-list reveal">
@@ -545,6 +942,7 @@ export default function App() {
           </dl>
         </section>
 
+        {/* Education Section */}
         <section
           id="education"
           className="education-section section-wrap section-block reveal"
@@ -553,7 +951,7 @@ export default function App() {
           <div className="education-grid">
             <article>
               <h3>Information Technology</h3>
-              <p>University of Transport Ho Chi Minh City</p>
+              <p>University of Transport Ho Chi Minh City (UTH)</p>
               <time>2022 - 2026</time>
             </article>
             <dl>
@@ -563,19 +961,21 @@ export default function App() {
               </div>
               <div>
                 <dt>English</dt>
-                <dd>Intermediate, reading and technical communication</dd>
+                <dd>Intermediate: technical documentation and communication</dd>
               </div>
             </dl>
           </div>
         </section>
 
+        {/* Contact Section */}
         <section id="contact" className="contact-section">
           <div className="section-wrap contact-inner reveal">
             <div>
               <h2>Start with the work. Continue with a conversation.</h2>
               <p>
-                I am looking for Android development internship opportunities.
-                Email or LinkedIn is the most direct way to reach me.
+                I am open to Android development internship and junior
+                engineering roles. Email or LinkedIn is the most direct way to
+                connect.
               </p>
             </div>
             <div className="contact-actions">
@@ -605,10 +1005,8 @@ export default function App() {
                       ? "Copy unavailable"
                       : "Copy email"}
                 </button>
-                <ExternalLink href="https://github.com/vinh0407">
-                  GitHub
-                </ExternalLink>
-                <ExternalLink href={LINKEDIN_URL}>LinkedIn</ExternalLink>
+                <ActionLink href={GITHUB_PROFILE_URL}>GitHub</ActionLink>
+                <ActionLink href={LINKEDIN_URL}>LinkedIn</ActionLink>
               </div>
               <span className="sr-only" aria-live="polite">
                 {copyStatus === "copied"
@@ -622,11 +1020,42 @@ export default function App() {
         </section>
       </main>
 
+      {/* Lightbox Modal */}
+      {activeScreenshot && (
+        <div
+          className="lightbox-overlay"
+          onClick={() => setActiveScreenshot(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={activeScreenshot.caption}
+        >
+          <div
+            className="lightbox-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="lightbox-close"
+              onClick={() => setActiveScreenshot(null)}
+              aria-label="Close image preview"
+            >
+              <X size={20} weight="bold" />
+            </button>
+            <img
+              className="lightbox-img"
+              src={activeScreenshot.url}
+              alt={activeScreenshot.caption}
+            />
+            <p className="lightbox-caption">{activeScreenshot.caption}</p>
+          </div>
+        </div>
+      )}
+
       <footer
         className="site-footer section-wrap"
-        inert={menuOpen ? true : undefined}
+        inert={menuOpen || activeScreenshot ? true : undefined}
       >
-        <span>© 2026 Ưng Đỗ Thế Vinh</span>
+        <span>© 2026 Ưng Đỗ Thế Vinh — Android &amp; Systems Developer</span>
         <a href="#top">Back to top</a>
       </footer>
     </div>
